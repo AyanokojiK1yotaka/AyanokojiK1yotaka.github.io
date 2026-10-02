@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="teal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nikhil.OS | Nikhil Gowda</title>
+<meta name="description" content="Nikhil, a Computer Science student in India exploring AI/ML, Linux, systems, and finance. Projects, notes, and ways to get in touch.">
+<meta name="theme-color" content="#1f5f6b">
+<meta property="og:title" content="Nikhil.OS">
+<meta property="og:description" content="Computer Science student exploring AI/ML, Linux, systems, and finance.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<style>
+:root{--a:#1f5f6b;--b:#2a7380;--accent:#f2b632;--paper:#f7f7ef;--ink:#14141a;--font:'VT323','Courier New',monospace}
+[data-theme=plum]{--a:#4d2a5c;--b:#5e3670;--accent:#7fe0c4}
+[data-theme=graphite]{--a:#2c2f33;--b:#383c41;--accent:#ff9f43}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:22px/1.35 var(--font);color:var(--ink);min-height:100vh;
+  background:conic-gradient(var(--b) 25%,var(--a) 0 50%,var(--b) 0 75%,var(--a) 0) 0 0/4px 4px;
+  padding:calc(44px + env(safe-area-inset-top,0px)) 0 calc(48px + env(safe-area-inset-bottom,0px))}
+::selection{background:var(--ink);color:var(--accent)}
+a{color:var(--ink)}
+a:hover,a:focus-visible,button:hover,button:focus-visible{background:var(--ink);color:var(--paper)}
+:focus-visible{outline:3px dashed var(--accent);outline-offset:2px}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.skip{position:absolute;left:-999px;top:0;z-index:2000;background:var(--accent);padding:4px 10px;border:3px solid var(--ink)}
+.skip:focus{left:8px;top:8px}
+
+.menubar{position:fixed;inset:0 0 auto;z-index:1000;height:calc(34px + env(safe-area-inset-top,0px));
+  padding:env(safe-area-inset-top,0px) 12px 0;display:flex;align-items:center;gap:6px;
+  background:var(--paper);border-bottom:3px solid var(--ink);font-size:22px}
+.menubar b{font-weight:400;margin-right:12px}
+.menubar button{padding:0 10px;height:100%}
+.menubar .sp{flex:1}
+.menubar time{padding-left:10px}
+
+.desktop{max-width:1040px;margin:0 auto;padding:22px 16px;display:grid;grid-template-columns:repeat(12,1fr);gap:28px;align-items:start}
+.win{grid-column:1/-1;background:var(--paper);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);position:relative;scroll-margin-top:60px}
+.win[hidden]{display:none}
+.win.w7{grid-column:span 7}.win.w5{grid-column:span 5}.win.w6{grid-column:span 6}
+.win.drag{box-shadow:10px 10px 0 var(--ink)}
+.bar{height:32px;border-bottom:3px solid var(--ink);display:flex;align-items:center;padding:0 8px;cursor:grab;user-select:none;touch-action:none;
+  background:repeating-linear-gradient(var(--ink) 0 2px,var(--paper) 2px 5px)}
+.drag .bar{cursor:grabbing}
+.bar .x{width:18px;height:18px;border:3px solid var(--ink);background:var(--paper);flex:none}
+.bar .x:hover,.bar .x:focus-visible{background:var(--accent);color:inherit}
+.bar .t{background:var(--paper);padding:0 12px;margin:0 auto;white-space:nowrap}
+.bar::after{content:"";width:18px;flex:none}
+.body{padding:20px 22px 24px}
+h1,h2{font-weight:400;margin:0}
+h2{font-size:30px;margin-bottom:8px}
+p{margin:0 0 12px;max-width:60ch}
+
+h1{font-size:clamp(48px,10vw,96px);line-height:.95;margin-bottom:14px}
+.type{display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:bottom;width:0;border-right:.1em solid var(--ink);
+  animation:type 1s steps(7,end) .3s forwards,blink .8s steps(1) infinite}
+@keyframes type{to{width:7ch}}
+@keyframes blink{50%{border-color:transparent}}
+.lead{font-size:26px}
+.tag{display:inline-block;margin-top:8px;padding:0 10px;background:var(--accent);border:3px solid var(--ink)}
+
+dl{margin:0}dl div{display:flex;gap:14px;padding:6px 0;border-bottom:2px dotted var(--ink)}
+dl div:last-child{border:0}dt{width:11ch;flex:none;font-weight:700}dd{margin:0}
+pre{margin:0;font:inherit;white-space:pre-wrap;background:var(--ink);color:var(--accent);padding:12px 14px}
+pre i{font-style:normal;opacity:.65}
+
+.files{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:14px}
+.file{text-align:center;text-decoration:none;padding:10px 4px;display:block}
+.ic{display:block;width:44px;height:54px;margin:0 auto 8px;border:3px solid var(--ink);background:var(--paper);position:relative}
+.ic::before{content:"";position:absolute;top:-3px;right:-3px;width:14px;height:14px;background:var(--ink);clip-path:polygon(0 0,100% 100%,0 100%)}
+.ic::after{content:"";position:absolute;left:7px;right:7px;top:20px;height:3px;background:var(--ink);box-shadow:0 8px 0 var(--ink),0 16px 0 var(--ink)}
+.file:hover .ic,.file:focus-visible .ic{background:var(--accent)}
+.file small{display:block;opacity:.7}
+.chips span{display:inline-block;border:2px solid var(--ink);padding:0 8px;margin:0 6px 8px 0}
+.chips .hot{background:var(--accent)}
+.links a{display:block;padding:4px 8px;margin:0 -8px;text-decoration:none}
+.links a::before{content:"> "}
+
+.status{position:fixed;inset:auto 0 0;z-index:900;display:flex;justify-content:space-between;gap:12px;
+  padding:2px 14px calc(2px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:3px solid var(--ink);font-size:19px}
+@media(max-width:760px){.win.w7,.win.w5,.win.w6{grid-column:1/-1}.desktop{gap:22px}.bar{cursor:default}.status .hint{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.type{animation:none;width:7ch;border-color:transparent}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="menubar">
+  <b>◆ Nikhil.OS</b>
+  <button id="showAll" type="button">Show all</button>
+  <button id="theme" type="button" aria-label="Change color theme">Theme</button>
+  <span class="sp"></span>
+  <time id="clock">--:--</time>
+</header>
+
+<main class="desktop" id="main">
+
+  <section class="win" id="welcome" aria-labelledby="hi">
+    <div class="bar"><button class="x" type="button" aria-label="Close Welcome"></button><span class="t">Welcome.txt</span></div>
+    <div class="body">
+      <h1 id="hi">Hi, I'm <span class="type">Nikhil.</span></h1>
+      <p class="lead">Computer Science student, curious about how things work and even more about what can be built with that understanding.</p>
+      <span class="tag">Open to internships &amp; collabs</span>
+    </div>
+  </section>
+
+  <section class="win w7" id="about" aria-labelledby="h-about">
+    <div class="bar"><button class="x" type="button" aria-label="Close About"></button><span class="t">About Me</span></div>
+    <div class="body">
+      <h2 id="h-about">README</h2>
+      <p>I explore software, AI/ML, Linux, open source, and computer systems, and I like finance and investing just as much. I learn by doing: building projects, self-hosting, tinkering with Raspberry Pi, and joining hackathons.</p>
+      <p>To me, technology and finance are two ways of understanding systems. Long term, I want to build useful products and eventually my own companies.</p>
+      <dl>
+        <div><dt>School</dt><dd>Sreyas Institute of Engineering and Technology</dd></div>
+        <div><dt>Course</dt><dd>B.Tech, Computer Science and Engineering</dd></div>
+        <div><dt>Year</dt><dd>Second</dd></div>
+        <div><dt>Where</dt><dd>India</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="win w5" id="now" aria-labelledby="h-now">
+    <div class="bar"><button class="x" type="button" aria-label="Close Terminal"></button><span class="t">Terminal</span></div>
+    <div class="body">
+      <h2 id="h-now">now.txt</h2>
+<pre><i>$</i> cat now.txt
+building: projects, hackathons
+running:  Linux, Raspberry Pi
+studying: DSA, systems, markets
+<i>$</i> _</pre>
+    </div>
+  </section>
+
+  <section class="win w6" id="ml" aria-labelledby="h-ml">
+    <div class="bar"><button class="x" type="button" aria-label="Close Machine Learning"></button><span class="t">ml.txt</span></div>
+    <div class="body">
+      <h2 id="h-ml">Machine Learning</h2>
+      <p>I'm exploring AI and ML the same way I learn everything else: build something, break it, then study why it works.</p>
+      <dl>
+        <div><dt>Approach</dt><dd>Projects and experiments first, theory alongside</dd></div>
+        <div><dt>Foundations</dt><dd>Programming, data structures and algorithms</dd></div>
+        <div><dt>Also into</dt><dd>Open source, Linux, self-hosted systems</dd></div>
+        <div><dt>Latest</dt><dd>Add your first ML project here</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="win w6" id="finance" aria-labelledby="h-fin">
+    <div class="bar"><button class="x" type="button" aria-label="Close Finance"></button><span class="t">finance.txt</span></div>
+    <div class="body">
+      <h2 id="h-fin">Finance</h2>
+      <p>I like understanding how businesses make money and how technology creates value, and I follow markets to learn how that shows up in prices.</p>
+      <dl>
+        <div><dt>Studying</dt><dd>Markets and investments</dd></div>
+        <div><dt>Thinking</dt><dd>Risk, returns, and business quality</dd></div>
+        <div><dt>Believe in</dt><dd>Long-term compounding</dd></div>
+        <div><dt>Goal</dt><dd>Technical depth plus business sense</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="win" id="projects" aria-labelledby="h-proj">
+    <div class="bar"><button class="x" type="button" aria-label="Close Projects"></button><span class="t">Projects</span></div>
+    <div class="body">
+      <h2 id="h-proj">My Files</h2>
+      <div class="files">
+        <a class="file" href="https://github.com/AyanokojiK1yotaka/project-one"><span class="ic"></span>project-one<small>short description</small></a>
+        <a class="file" href="https://github.com/AyanokojiK1yotaka/project-two"><span class="ic"></span>project-two<small>short description</small></a>
+        <a class="file" href="https://github.com/AyanokojiK1yotaka/project-three"><span class="ic"></span>project-three<small>short description</small></a>
+        <a class="file" href="https://github.com/AyanokojiK1yotaka"><span class="ic"></span>more.dir<small>all repositories</small></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="win w5" id="tools" aria-labelledby="h-tools">
+    <div class="bar"><button class="x" type="button" aria-label="Close Toolbox"></button><span class="t">Toolbox</span></div>
+    <div class="body chips">
+      <h2 id="h-tools">Things I use</h2>
+      <span class="hot">Linux</span><span class="hot">Python</span><span class="hot">Git</span><span>Raspberry Pi</span><span>Self-hosting</span><span>Open source</span><span>C</span><span>Java</span><span>Bash</span><span>SQL</span><span>HTML/CSS</span>
+    </div>
+  </section>
+
+  <section class="win w7" id="contact" aria-labelledby="h-contact">
+    <div class="bar"><button class="x" type="button" aria-label="Close Contact"></button><span class="t">Contact</span></div>
+    <div class="body links">
+      <h2 id="h-contact">Say hello</h2>
+      <a href="https://github.com/AyanokojiK1yotaka" rel="me noopener">GitHub: AyanokojiK1yotaka</a>
+      <a href="https://www.linkedin.com/in/nikhil-gowda-69os" rel="me noopener">LinkedIn: nikhil-gowda-69os</a>
+      <a href="mailto:srinikhilgowda@gmail.com">Email: srinikhilgowda@gmail.com</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="status"><span id="count" role="status" aria-live="polite"></span><span class="hint">Drag a title bar to move a window</span></footer>
+
+<script>
+(function(){
+  var wins=[].slice.call(document.querySelectorAll('.win')),
+      count=document.getElementById('count'),
+      wide=matchMedia('(min-width:761px)'), z=10;
+
+  // clock: update on the minute, pause when tab is hidden
+  var clock=document.getElementById('clock'),timer;
+  function tick(){clock.textContent=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}
+  function run(){tick();clearInterval(timer);timer=setInterval(tick,20000)}
+  document.addEventListener('visibilitychange',function(){document.hidden?clearInterval(timer):run()});
+  run();
+
+  // window count
+  function update(){
+    var n=wins.filter(function(w){return !w.hidden}).length;
+    count.textContent=n?n+(n===1?' window open':' windows open'):'All windows closed. Choose Show all to bring them back.';
+  }
+  update();
+
+  // close, bring to front, drag (event delegation + rAF)
+  var cur,sx,sy,raf;
+  document.addEventListener('pointerdown',function(e){
+    var win=e.target.closest&&e.target.closest('.win'); if(!win) return;
+    win.style.zIndex=++z;
+    var bar=e.target.closest('.bar');
+    if(!bar||e.target.closest('.x')||!wide.matches) return;
+    cur={win:win,bar:bar,ox:+win.dataset.x||0,oy:+win.dataset.y||0,dx:0,dy:0};
+    sx=e.clientX;sy=e.clientY;win.classList.add('drag');bar.setPointerCapture(e.pointerId);
+  });
+  document.addEventListener('pointermove',function(e){
+    if(!cur) return;
+    cur.dx=e.clientX-sx;cur.dy=e.clientY-sy;
+    if(!raf)raf=requestAnimationFrame(function(){
+      raf=0;if(cur)cur.win.style.transform='translate('+(cur.ox+cur.dx)+'px,'+(cur.oy+cur.dy)+'px)';
+    });
+  });
+  function end(){
+    if(!cur) return;
+    cur.win.dataset.x=cur.ox+cur.dx;cur.win.dataset.y=cur.oy+cur.dy;
+    cur.win.classList.remove('drag');cur=null;
+  }
+  document.addEventListener('pointerup',end);
+  document.addEventListener('pointercancel',end);
+
+  document.addEventListener('click',function(e){
+    var x=e.target.closest('.x');
+    if(x){x.closest('.win').hidden=true;update();}
+  });
+
+  // show all: reopen and reset positions
+  document.getElementById('showAll').addEventListener('click',function(){
+    wins.forEach(function(w){w.hidden=false;w.style.transform='';w.dataset.x=w.dataset.y=0});
+    update();
+  });
+
+  // themes
+  var themes=['teal','plum','graphite'],root=document.documentElement,
+      meta=document.querySelector('meta[name=theme-color]'),
+      colors={teal:'#1f5f6b',plum:'#4d2a5c',graphite:'#2c2f33'};
+  function setTheme(t){root.dataset.theme=t;meta.content=colors[t];try{localStorage.setItem('theme',t)}catch(e){}}
+  meta.content=colors[root.dataset.theme]||colors.teal;
+  document.getElementById('theme').addEventListener('click',function(){
+    setTheme(themes[(themes.indexOf(root.dataset.theme)+1)%themes.length]);
+  });
+})();
+</script>
+</body>
+</html>
