@@ -18,6 +18,7 @@
 :root{--a:#1f5f6b;--b:#2a7380;--accent:#f2b632;--paper:#f7f7ef;--ink:#14141a;--font:'VT323','Courier New',monospace}
 [data-theme=plum]{--a:#4d2a5c;--b:#5e3670;--accent:#7fe0c4}
 [data-theme=graphite]{--a:#2c2f33;--b:#383c41;--accent:#ff9f43}
+[data-theme=gameboy]{--a:#306230;--b:#3b7a3b;--accent:#9bbc0f;--paper:#d6e6a8;--ink:#0f380f}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;font:22px/1.35 var(--font);color:var(--ink);min-height:100vh;
@@ -76,15 +77,55 @@ pre i{font-style:normal;opacity:.65}
 .ic::after{content:"";position:absolute;left:7px;right:7px;top:20px;height:3px;background:var(--ink);box-shadow:0 8px 0 var(--ink),0 16px 0 var(--ink)}
 .file:hover .ic,.file:focus-visible .ic{background:var(--accent)}
 .file small{display:block;opacity:.7}
+.soon{opacity:.6;cursor:default}.soon .ic{border-style:dashed}.soon:hover .ic{background:var(--paper)}
 .chips span{display:inline-block;border:2px solid var(--ink);padding:0 8px;margin:0 6px 8px 0}
 .chips .hot{background:var(--accent)}
 .links a{display:block;padding:4px 8px;margin:0 -8px;text-decoration:none}
 .links a::before{content:"> "}
 
+.term{background:var(--ink);color:var(--accent);padding:10px 12px}
+.term pre{padding:0;max-height:9.5em;overflow:auto;margin-bottom:6px}
+.term label{display:flex;gap:8px}
+.term input{flex:1;min-width:0;background:none;border:0;color:inherit;font:inherit;caret-color:var(--accent);outline:none}
+.term:focus-within{outline:3px dashed var(--accent);outline-offset:2px}
+.flash{animation:flash .9s steps(2,end) 2}
+@keyframes flash{50%{background:var(--accent)}}
+.calc{margin-top:14px;padding-top:12px;border-top:3px solid var(--ink)}
+.calc label{display:flex;justify-content:space-between;gap:10px}
+.calc input[type=range]{width:100%;accent-color:var(--ink);margin:2px 0 8px}
+.calc output{font-weight:700}
+.meter{height:20px;border:3px solid var(--ink);display:flex;margin:6px 0}
+.meter i{display:block;background:var(--paper);transition:width .2s steps(6)}
+.meter b{display:block;flex:1;background:var(--accent)}
+small.fine{display:block;opacity:.7;font-size:18px;line-height:1.2}
+canvas{display:block;width:100%;height:150px;border:3px solid var(--ink);margin-top:12px;cursor:crosshair;touch-action:manipulation;background:var(--paper)}
+.plotbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px}
+.btn{border:3px solid var(--ink);padding:0 10px;background:var(--paper)}
+.status .ticker{flex:1;overflow:hidden;white-space:nowrap;text-align:right}
+.ticker span{display:inline-block;animation:tick 32s linear infinite}
+@keyframes tick{to{transform:translateX(-50%)}}
+.tag::before{content:"★ "}
+.fx{position:fixed;z-index:1500;pointer-events:none;color:var(--accent);font-size:20px;line-height:1;
+  text-shadow:1px 0 var(--ink),-1px 0 var(--ink),0 1px var(--ink),0 -1px var(--ink);animation:pop .7s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--dx),var(--dy)) scale(.4);opacity:0}}
+.cf{position:fixed;top:-12px;width:8px;height:8px;z-index:1500;pointer-events:none;animation:fall 2.6s linear forwards}
+@keyframes fall{to{transform:translate(var(--dx),105vh) rotate(540deg)}}
+.rain{position:fixed;inset:0;z-index:1400;pointer-events:none}
+#pet{position:fixed;right:16px;bottom:calc(48px + env(safe-area-inset-bottom,0px));z-index:950;width:64px;height:64px;padding:0;background:none}
+#pet:hover,#pet:focus-visible{background:none}
+#pet svg{width:100%;height:100%;display:block;shape-rendering:crispEdges;
+  filter:drop-shadow(2px 0 0 var(--paper)) drop-shadow(-2px 0 0 var(--paper)) drop-shadow(0 2px 0 var(--paper)) drop-shadow(0 -2px 0 var(--paper))}
+#pet .eyes{animation:blink2 4s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes blink2{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+#pet.hop{animation:hop .4s steps(4)}
+@keyframes hop{50%{transform:translateY(-14px)}}
+#bub{position:fixed;right:84px;bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:950;background:var(--paper);border:3px solid var(--ink);
+  padding:0 10px;opacity:0;pointer-events:none;transform:translateY(4px);transition:opacity .15s,transform .15s;white-space:nowrap}
+#bub.on{opacity:1;transform:none}
 .status{position:fixed;inset:auto 0 0;z-index:900;display:flex;justify-content:space-between;gap:12px;
   padding:2px 14px calc(2px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:3px solid var(--ink);font-size:19px}
-@media(max-width:760px){.win.w7,.win.w5,.win.w6{grid-column:1/-1}.desktop{gap:22px}.bar{cursor:default}.status .hint{display:none}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.type{animation:none;width:7ch;border-color:transparent}}
+@media(max-width:760px){#pet{width:48px;height:48px;right:10px;bottom:calc(46px + env(safe-area-inset-bottom,0px))}#bub{right:64px;bottom:calc(70px + env(safe-area-inset-bottom,0px))}.win.w7,.win.w5,.win.w6{grid-column:1/-1}.desktop{gap:22px}.bar{cursor:default}.status .ticker{display:block}}
+@media(prefers-reduced-motion:reduce){.ticker span,.flash,#pet .eyes,#pet.hop{animation:none}html{scroll-behavior:auto}.type{animation:none;width:7ch;border-color:transparent}}
 </style>
 </head>
 <body>
@@ -128,11 +169,11 @@ pre i{font-style:normal;opacity:.65}
     <div class="bar"><button class="x" type="button" aria-label="Close Terminal"></button><span class="t">Terminal</span></div>
     <div class="body">
       <h2 id="h-now">now.txt</h2>
-<pre><i>$</i> cat now.txt
-building: projects, hackathons
+<div class="term"><pre id="out">building: projects, hackathons
 running:  Linux, Raspberry Pi
 studying: DSA, systems, markets
-<i>$</i> _</pre>
+-- type help --</pre>
+      <label><span>$</span><input id="cmd" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command" placeholder="try: help"></label></div>
     </div>
   </section>
 
@@ -145,8 +186,10 @@ studying: DSA, systems, markets
         <div><dt>Approach</dt><dd>Projects and experiments first, theory alongside</dd></div>
         <div><dt>Foundations</dt><dd>Programming, data structures and algorithms</dd></div>
         <div><dt>Also into</dt><dd>Open source, Linux, self-hosted systems</dd></div>
-        <div><dt>Latest</dt><dd>Add your first ML project here</dd></div>
+        <div><dt>Latest</dt><dd>Work in progress</dd></div>
       </dl>
+      <canvas id="plot" aria-label="Click to add points; a line is fitted to them live"></canvas>
+      <div class="plotbar"><small class="fine" id="fit">Click the box to add data. A line learns it live.</small><button class="btn" id="clr" type="button">Reset</button></div>
     </div>
   </section>
 
@@ -161,6 +204,14 @@ studying: DSA, systems, markets
         <div><dt>Believe in</dt><dd>Long-term compounding</dd></div>
         <div><dt>Goal</dt><dd>Technical depth plus business sense</dd></div>
       </dl>
+      <div class="calc">
+        <label>Monthly <output id="oM"></output></label><input id="iM" type="range" min="500" max="50000" step="500" value="5000" aria-label="Monthly investment in rupees">
+        <label>Years <output id="oY"></output></label><input id="iY" type="range" min="1" max="40" value="15" aria-label="Years">
+        <label>Yearly return <output id="oR"></output></label><input id="iR" type="range" min="4" max="18" value="12" aria-label="Assumed yearly return percent">
+        <p style="margin:6px 0 0"><b id="res"></b></p>
+        <div class="meter" aria-hidden="true"><i id="bar"></i><b></b></div>
+        <small class="fine">White is what you put in, yellow is growth. A toy to feel compounding, not a forecast or advice.</small>
+      </div>
     </div>
   </section>
 
@@ -168,10 +219,11 @@ studying: DSA, systems, markets
     <div class="bar"><button class="x" type="button" aria-label="Close Projects"></button><span class="t">Projects</span></div>
     <div class="body">
       <h2 id="h-proj">My Files</h2>
+      <p>Projects are in the pipeline. Follow along on GitHub to see them land.</p>
       <div class="files">
-        <a class="file" href="https://github.com/AyanokojiK1yotaka/project-one"><span class="ic"></span>project-one<small>short description</small></a>
-        <a class="file" href="https://github.com/AyanokojiK1yotaka/project-two"><span class="ic"></span>project-two<small>short description</small></a>
-        <a class="file" href="https://github.com/AyanokojiK1yotaka/project-three"><span class="ic"></span>project-three<small>short description</small></a>
+        <div class="file soon"><span class="ic"></span>project-01<small>in the pipeline</small></div>
+        <div class="file soon"><span class="ic"></span>project-02<small>in the pipeline</small></div>
+        <div class="file soon"><span class="ic"></span>project-03<small>in the pipeline</small></div>
         <a class="file" href="https://github.com/AyanokojiK1yotaka"><span class="ic"></span>more.dir<small>all repositories</small></a>
       </div>
     </div>
@@ -192,12 +244,16 @@ studying: DSA, systems, markets
       <a href="https://github.com/AyanokojiK1yotaka" rel="me noopener">GitHub: AyanokojiK1yotaka</a>
       <a href="https://www.linkedin.com/in/nikhil-gowda-69os" rel="me noopener">LinkedIn: nikhil-gowda-69os</a>
       <a href="mailto:srinikhilgowda@gmail.com">Email: srinikhilgowda@gmail.com</a>
+      <small class="fine" style="margin-top:12px">made with <button id="heart" type="button" aria-label="Send love" style="padding:0 2px">♥</button> and too much coffee</small>
     </div>
   </section>
 
 </main>
 
-<footer class="status"><span id="count" role="status" aria-live="polite"></span><span class="hint">Drag a title bar to move a window</span></footer>
+<button id="pet" type="button" aria-label="Pet the cat"><svg viewBox="0 0 16 16" aria-hidden="true"><g style="fill:var(--ink)"><rect x="3" y="2" width="2" height="2"/><rect x="11" y="2" width="2" height="2"/><rect x="3" y="4" width="10" height="6"/><rect x="4" y="10" width="8" height="5"/><rect x="12" y="11" width="3" height="1"/><rect x="14" y="8" width="1" height="4"/></g><g class="eyes" style="fill:var(--accent)"><rect x="5" y="6" width="2" height="2"/><rect x="9" y="6" width="2" height="2"/></g><rect x="7" y="8" width="2" height="1" fill="#ff8fa3"/></svg></button>
+<div id="bub" role="status"></div>
+
+<footer class="status"><span id="count" role="status" aria-live="polite"></span><span class="ticker hint" aria-hidden="true"><span>▲ CURIOSITY +∞% · ▲ COMPOUNDING (LONG TERM) · ▼ SLEEP -12% · ▲ RASPBERRY PI +1 · ▲ COMMITS +3 · NOT FINANCIAL ADVICE · &nbsp;▲ CURIOSITY +∞% · ▲ COMPOUNDING (LONG TERM) · ▼ SLEEP -12% · ▲ RASPBERRY PI +1 · ▲ COMMITS +3 · NOT FINANCIAL ADVICE · </span></span></footer>
 
 <script>
 (function(){
@@ -209,7 +265,7 @@ studying: DSA, systems, markets
   var clock=document.getElementById('clock'),timer;
   function tick(){clock.textContent=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}
   function run(){tick();clearInterval(timer);timer=setInterval(tick,20000)}
-  document.addEventListener('visibilitychange',function(){document.hidden?clearInterval(timer):run()});
+  var T=document.title;document.addEventListener('visibilitychange',function(){document.title=document.hidden?'Come back! 🥺':T;document.hidden?clearInterval(timer):run()});
   run();
 
   // window count
@@ -258,12 +314,161 @@ studying: DSA, systems, markets
   // themes
   var themes=['teal','plum','graphite'],root=document.documentElement,
       meta=document.querySelector('meta[name=theme-color]'),
-      colors={teal:'#1f5f6b',plum:'#4d2a5c',graphite:'#2c2f33'};
+      colors={teal:'#1f5f6b',plum:'#4d2a5c',graphite:'#2c2f33',gameboy:'#306230'};
   function setTheme(t){root.dataset.theme=t;meta.content=colors[t];try{localStorage.setItem('theme',t)}catch(e){}}
   meta.content=colors[root.dataset.theme]||colors.teal;
   document.getElementById('theme').addEventListener('click',function(){
     setTheme(themes[(themes.indexOf(root.dataset.theme)+1)%themes.length]);
   });
+  // ---- terminal ----
+  var out=document.getElementById('out'),cmd=document.getElementById('cmd'),hist=[],hi=0;
+  var ids={about:'about',ml:'ml',finance:'finance',projects:'projects',tools:'tools',contact:'contact',terminal:'now'};
+  var quips=['Compounding is just patience with a spreadsheet.','Works on my machine. Ships on yours.','Read the docs. Then read the source.','Markets are noisy. Build things that are not.','sudo make me a sandwich'];
+  function say(t){out.textContent+='\n'+t;out.scrollTop=out.scrollHeight}
+  function openWin(id){
+    var w=document.getElementById(id);if(!w)return false;
+    w.hidden=false;w.style.zIndex=++z;update();
+    w.scrollIntoView({behavior:'smooth',block:'center'});
+    w.classList.remove('flash');void w.offsetWidth;w.classList.add('flash');return true;
+  }
+  var cmds={
+    help:function(){say('help about ml finance projects contact\nopen <window>  theme  clear\nwhoami  ls  date  fortune  sudo\nfun: cat coffee hack love party\n(there are a few secrets. poke around.)')},
+    about:function(){say('Nikhil, CS student. Curious how things work, more curious what to build with that.')},
+    ml:function(){say('Learning AI/ML by building. Opening ml.txt...');openWin('ml')},
+    finance:function(){say('Markets, businesses, compounding. Opening finance.txt...');openWin('finance')},
+    projects:function(){say('Opening projects...');openWin('projects')},
+    contact:function(){say('Opening contact...');openWin('contact')},
+    whoami:function(){say('nikhil')},
+    ls:function(){say('about  ml  finance  projects  tools  contact  terminal')},
+    date:function(){say(new Date().toString())},
+    fortune:function(){say(quips[Math.floor(Math.random()*quips.length)])},
+    theme:function(){document.getElementById('theme').click();say('theme: '+root.dataset.theme)},
+    clear:function(){out.textContent=''},
+    sudo:function(){say('nikhil is not in the sudoers file. This incident will be reported.')}
+  };
+  cmd.addEventListener('keydown',function(e){
+    if(e.key==='ArrowUp'&&hist.length){hi=Math.max(0,hi-1);cmd.value=hist[hi];e.preventDefault();return}
+    if(e.key==='ArrowDown'){hi=Math.min(hist.length,hi+1);cmd.value=hist[hi]||'';return}
+    if(e.key!=='Enter')return;
+    var v=cmd.value.trim(),a=v.toLowerCase().split(/\s+/);cmd.value='';
+    if(!v)return;hist.push(v);hi=hist.length;say('$ '+v);
+    if(a[0]==='open'){ids[a[1]]&&openWin(ids[a[1]])?say('opened '+a[1]):say('open: try one of '+Object.keys(ids).join(', '));return}
+    (cmds[a[0]]||function(){say(a[0]+': command not found. Try help.')})();
+  });
+
+  // ---- compounding toy ----
+  var iM=document.getElementById('iM'),iY=document.getElementById('iY'),iR=document.getElementById('iR'),
+      inr=new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0});
+  function calc(){
+    var P=+iM.value,Y=+iY.value,R=+iR.value,r=R/1200,n=Y*12,
+        fv=P*((Math.pow(1+r,n)-1)/r)*(1+r),inv=P*n;
+    document.getElementById('oM').textContent=inr.format(P);
+    document.getElementById('oY').textContent=Y;
+    document.getElementById('oR').textContent=R+'%';
+    document.getElementById('res').textContent=inr.format(fv)+' from '+inr.format(inv)+' invested';
+    document.getElementById('bar').style.width=(inv/fv*100)+'%';
+  }
+  [iM,iY,iR].forEach(function(i){i.addEventListener('input',calc)});calc();
+
+  // ---- tiny ML: live least-squares fit ----
+  var cv=document.getElementById('plot'),cx=cv.getContext('2d'),pts=[],fit=document.getElementById('fit');
+  function cs(v){return getComputedStyle(root).getPropertyValue(v).trim()}
+  function draw(){
+    var w=cv.clientWidth,h=cv.clientHeight,n=pts.length;
+    cx.clearRect(0,0,w,h);cx.fillStyle=cs('--paper');cx.fillRect(0,0,w,h);
+    if(n>1){
+      var sx=0,sy=0,sxy=0,sxx=0;
+      pts.forEach(function(p){sx+=p[0];sy+=p[1];sxy+=p[0]*p[1];sxx+=p[0]*p[0]});
+      var d=n*sxx-sx*sx;
+      if(d>1e-6){
+        var m=(n*sxy-sx*sy)/d,b=(sy-m*sx)/n;
+        cx.strokeStyle=cs('--ink');cx.lineWidth=3;cx.beginPath();cx.moveTo(0,b);cx.lineTo(w,m*w+b);cx.stroke();
+        fit.textContent=n+' points. Trend: '+(Math.abs(m)<.05?'flat':m<0?'rising':'falling')+'.';
+      }
+    } else fit.textContent='Click the box to add data. A line learns it live.';
+    pts.forEach(function(p){cx.fillStyle=cs('--accent');cx.strokeStyle=cs('--ink');cx.lineWidth=2;cx.fillRect(p[0]-5,p[1]-5,10,10);cx.strokeRect(p[0]-5,p[1]-5,10,10)});
+  }
+  function size(){var d=devicePixelRatio||1;cv.width=cv.clientWidth*d;cv.height=cv.clientHeight*d;cx.setTransform(d,0,0,d,0,0);draw()}
+  function seed(){pts=[];for(var i=1;i<=6;i++)pts.push([i*cv.clientWidth/7,cv.clientHeight*.8-i*cv.clientHeight/10+(Math.random()-.5)*34])}
+  cv.addEventListener('pointerdown',function(e){var r=cv.getBoundingClientRect();pts.push([e.clientX-r.left,e.clientY-r.top]);draw()});
+  document.getElementById('clr').addEventListener('click',function(){pts=[];draw()});
+  addEventListener('resize',size);
+  document.getElementById('theme').addEventListener('click',function(){setTimeout(draw,0)});
+  size();seed();draw();
+  // ---- cute stuff and easter eggs ----
+  var calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function fx(x,y,chars,n){
+    if(calm)return;
+    for(var i=0;i<n;i++){
+      var e=document.createElement('span'),a=Math.random()*6.28,d=24+Math.random()*34;
+      e.className='fx';e.textContent=chars[i%chars.length];
+      e.style.cssText='left:'+x+'px;top:'+y+'px;--dx:'+Math.cos(a)*d+'px;--dy:'+(Math.sin(a)*d-18)+'px';
+      e.addEventListener('animationend',function(){this.remove()});
+      document.body.appendChild(e);
+    }
+  }
+  function confetti(n){
+    if(calm)return;var c=['#f2b632','#f7f7ef','#14141a','#d94f3d','#7fe0c4'];
+    for(var i=0;i<n;i++){
+      var e=document.createElement('i');e.className='cf';
+      e.style.cssText='left:'+Math.random()*100+'vw;background:'+c[i%5]+';--dx:'+(Math.random()*160-80)+'px;animation-duration:'+(1.8+Math.random()*1.6)+'s;animation-delay:'+Math.random()*.4+'s';
+      e.addEventListener('animationend',function(){this.remove()});
+      document.body.appendChild(e);
+    }
+  }
+  document.addEventListener('pointerdown',function(e){
+    if(e.target.closest&&e.target.closest('input,canvas'))return;
+    fx(e.clientX,e.clientY,['\u2726','\u00b7','\u2727'],4);
+  });
+
+  // the cat
+  var pet=document.getElementById('pet'),bub=document.getElementById('bub'),pc=0,bt;
+  var meows=['meow!','mrrp?','pspsps','purr purr','try the terminal?','feed me commits','nice mouse skills','I run on treats'];
+  function meow(t){bub.textContent=t;bub.classList.add('on');clearTimeout(bt);bt=setTimeout(function(){bub.classList.remove('on')},2400)}
+  function party(){confetti(90);meow('+30 lives!')}
+  pet.addEventListener('click',function(){
+    pc++;pet.classList.remove('hop');void pet.offsetWidth;pet.classList.add('hop');
+    var r=pet.getBoundingClientRect();fx(r.left+r.width/2,r.top,['\u2665'],3);
+    if(pc%10===0){meow('party time!');confetti(60)}else meow(meows[Math.floor(Math.random()*meows.length)]);
+  });
+
+  // secret theme: click the logo 5 times, or type gameboy
+  function gameboy(){setTheme('gameboy');meow('secret theme unlocked!');draw()}
+  var lc=0;document.querySelector('.menubar b').addEventListener('click',function(){if(++lc===5){lc=0;gameboy()}});
+
+  // konami code
+  var seq=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'],ki=0;
+  document.addEventListener('keydown',function(e){
+    if(/INPUT|TEXTAREA/.test(e.target.tagName))return;
+    ki=(e.key===seq[ki]||e.key.toLowerCase()===seq[ki])?ki+1:(e.key===seq[0]?1:0);
+    if(ki===seq.length){ki=0;party()}
+  });
+
+  // hearts and matrix rain
+  function love(){for(var i=0;i<8;i++)setTimeout(function(){fx(Math.random()*innerWidth,innerHeight*.7,['\u2665'],2)},i*120)}
+  document.getElementById('heart').addEventListener('click',love);
+  function matrix(){
+    if(calm){say('matrix: skipped, reduced motion is on.');return}
+    var c=document.createElement('canvas');c.className='rain';document.body.appendChild(c);
+    var g=c.getContext('2d'),w=c.width=innerWidth,h=c.height=innerHeight,cols=Math.floor(w/16),y=[];
+    for(var i=0;i<cols;i++)y[i]=Math.random()*-40;
+    var t=setInterval(function(){
+      g.fillStyle='rgba(0,0,0,.12)';g.fillRect(0,0,w,h);g.fillStyle='#4cff7a';g.font='16px monospace';
+      for(var i=0;i<cols;i++){g.fillText(String.fromCharCode(48+Math.random()*42|0),i*16,y[i]*16);y[i]=(y[i]*16>h&&Math.random()>.97)?0:y[i]+1}
+    },50);
+    setTimeout(function(){clearInterval(t);c.remove()},4500);
+  }
+
+  // more terminal commands
+  cmds.cat=function(){say('=^..^=  mrrp!');meow('mrrp!')};
+  cmds.coffee=function(){say('brewing... [########--] 80%\n...done. no bugs were harmed.')};
+  cmds.hack=function(){say('accessing mainframe...');setTimeout(function(){say('access denied: it is just a Raspberry Pi')},700)};
+  cmds.love=function(){say('<3');love()};
+  cmds.party=cmds.konami=function(){say('party!');party()};
+  cmds.matrix=function(){say('wake up, nikhil...');matrix()};
+  cmds.gameboy=function(){say('loading cartridge...');gameboy()};
+
+  try{console.log('%cHi dev! Found the console. Try: up up down down left right left right b a','font:16px monospace')}catch(e){}
 })();
 </script>
 </body>
