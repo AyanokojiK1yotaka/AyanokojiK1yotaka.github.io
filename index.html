@@ -15,13 +15,20 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
 <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <style>
-:root{--a:#1f5f6b;--b:#2a7380;--accent:#f2b632;--paper:#f7f7ef;--ink:#14141a;--font:'VT323','Courier New',monospace}
-[data-theme=plum]{--a:#4d2a5c;--b:#5e3670;--accent:#7fe0c4}
-[data-theme=graphite]{--a:#2c2f33;--b:#383c41;--accent:#ff9f43}
+:root{--a:#1f5f6b;--b:#256a77;--accent:#efb73e;--paper:#f7f7ef;--ink:#14141a;--font:'VT323','Courier New',monospace}
+[data-theme=plum]{--a:#4d2a5c;--b:#56316a;--accent:#7fe0c4}
+[data-theme=graphite]{--a:#2c2f33;--b:#33373b;--accent:#ff9f43}
 [data-theme=gameboy]{--a:#306230;--b:#3b7a3b;--accent:#9bbc0f;--paper:#d6e6a8;--ink:#0f380f}
+[data-theme=classic]{--a:#008080;--b:#008080;--accent:#ffff66;--paper:#c0c0c0;--ink:#000}
+[data-theme=classic] .win{border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:2px 2px 0 #000,inset 1px 1px 0 #dfdfdf}
+[data-theme=classic] .bar{margin:3px;height:26px;border:0;background:linear-gradient(90deg,#000080,#1084d0)}
+[data-theme=classic] .bar .t{background:none;color:#fff;margin:0 auto 0 4px;padding:0;font-weight:700}
+[data-theme=classic] .bar::after{display:none}
+[data-theme=classic] .bar .x{order:2;width:22px;height:22px;border:2px solid;border-color:#fff #404040 #404040 #fff;background:#c0c0c0;color:#000;line-height:1;display:flex;align-items:center;justify-content:center}
+[data-theme=classic] .bar .x::before{content:"\00d7"}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;font:22px/1.35 var(--font);color:var(--ink);min-height:100vh;min-height:100dvh;
+body{margin:0;font:22px/1.4 var(--font);color:var(--ink);min-height:100vh;min-height:100dvh;
   background:conic-gradient(var(--b) 25%,var(--a) 0 50%,var(--b) 0 75%,var(--a) 0) 0 0/4px 4px;
   padding:calc(44px + env(safe-area-inset-top,0px)) 0 calc(48px + env(safe-area-inset-bottom,0px))}
 ::selection{background:var(--ink);color:var(--accent)}
@@ -35,20 +42,20 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
 .menubar{position:fixed;inset:0 0 auto;z-index:1000;height:calc(34px + env(safe-area-inset-top,0px));
   padding:env(safe-area-inset-top,0px) 12px 0;display:flex;align-items:center;gap:6px;
-  background:var(--paper);border-bottom:3px solid var(--ink);font-size:22px}
+  background:var(--paper);border-bottom:2px solid var(--ink);font-size:22px}
 .menubar b{font-weight:400;margin-right:12px}
 .menubar button{padding:0 10px;height:100%}
 .menubar .sp{flex:1}
 .menubar time{padding-left:10px}
 
 .desktop{max-width:1040px;margin:0 auto;padding:22px 16px;display:grid;grid-template-columns:repeat(12,1fr);gap:28px;align-items:start}
-.win{min-width:0;grid-column:1/-1;background:var(--paper);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);position:relative;scroll-margin-top:60px}
+.win{min-width:0;grid-column:1/-1;background:var(--paper);border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);box-shadow:5px 5px 0 color-mix(in srgb,var(--ink) 55%,transparent);position:relative;scroll-margin-top:60px}
 .win[hidden]{display:none}
 .win.w7{grid-column:span 7}.win.w5{grid-column:span 5}.win.w6{grid-column:span 6}
 .win.drag{box-shadow:10px 10px 0 var(--ink)}
-.bar{height:32px;border-bottom:3px solid var(--ink);display:flex;align-items:center;padding:0 8px;user-select:none;
-  background:repeating-linear-gradient(var(--ink) 0 2px,var(--paper) 2px 5px)}
-.bar .x{width:18px;height:18px;border:3px solid var(--ink);background:var(--paper);flex:none}
+.bar{height:32px;border-bottom:2px solid var(--ink);display:flex;align-items:center;padding:0 8px;user-select:none;
+  background:repeating-linear-gradient(var(--ink) 0 1px,var(--paper) 1px 4px)}
+.bar .x{width:18px;height:18px;border:2px solid var(--ink);background:var(--paper);flex:none}
 .bar .x:hover,.bar .x:focus-visible{background:var(--accent);color:inherit}
 .bar .t{background:var(--paper);padding:0 12px;margin:0 auto;white-space:nowrap}
 .bar::after{content:"";width:18px;flex:none}
@@ -63,7 +70,7 @@ h1{font-size:clamp(40px,11vw,96px);line-height:.95;margin-bottom:14px}
 @keyframes type{to{width:7ch}}
 @keyframes blink{50%{border-color:transparent}}
 .lead{font-size:26px}
-.tag{display:inline-block;margin-top:8px;padding:0 10px;background:var(--accent);border:3px solid var(--ink)}
+.tag{display:inline-block;margin-top:8px;padding:0 10px;background:var(--accent);border:2px solid var(--ink)}
 
 dl{margin:0}dl div{display:flex;gap:14px;padding:6px 0;border-bottom:2px dotted var(--ink)}
 dl div:last-child{border:0}dt{width:11ch;flex:none;font-weight:700}dd{margin:0}
@@ -103,7 +110,7 @@ canvas{display:block;width:100%;height:150px;border:3px solid var(--ink);margin-
 .plotbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px}
 .btn{border:3px solid var(--ink);padding:0 10px;background:var(--paper)}
 .status .ticker{flex:1;overflow:hidden;white-space:nowrap;text-align:right}
-.ticker span{display:inline-block;animation:tick 32s linear infinite}
+.ticker span{display:inline-block;animation:tick 56s linear infinite}
 @keyframes tick{to{transform:translateX(-50%)}}
 .tag::before{content:"★ "}
 .fx{position:fixed;z-index:1500;pointer-events:none;color:var(--accent);font-size:20px;line-height:1;
@@ -124,8 +131,29 @@ canvas{display:block;width:100%;height:150px;border:3px solid var(--ink);margin-
   padding:0 10px;opacity:0;pointer-events:none;transform:translateY(4px);transition:opacity .15s,transform .15s;white-space:nowrap}
 #bub.on{opacity:1;transform:none}
 .status{position:fixed;inset:auto 0 0;z-index:900;display:flex;justify-content:space-between;gap:12px;
-  padding:2px 14px calc(2px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:3px solid var(--ink);font-size:19px}
+  padding:2px 14px calc(2px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:2px solid var(--ink);font-size:19px}
 @media(max-width:760px){#pet{width:48px;height:48px;right:10px;bottom:calc(46px + env(safe-area-inset-bottom,0px))}#bub{right:64px;bottom:calc(70px + env(safe-area-inset-bottom,0px))}.win.w7,.win.w5,.win.w6{grid-column:1/-1}.desktop{gap:22px}.bar{cursor:default}.status .ticker{display:block}}
+.new{display:inline-block;vertical-align:middle;background:var(--accent);color:var(--ink);border:1px solid var(--ink);border-radius:99px;font-size:15px;line-height:1.1;padding:0 7px;margin-left:8px}
+.meta{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:14px;font-size:20px}
+.meta b{font-weight:400;background:var(--ink);color:var(--accent);padding:0 6px;letter-spacing:3px}
+.marq{overflow:hidden;white-space:nowrap;border-top:2px solid var(--ink);padding:3px 0;font-size:19px;opacity:.85}
+.uc{background:repeating-linear-gradient(45deg,#f2b632 0 10px,#14141a 10px 20px);padding:3px;margin-bottom:12px;opacity:.85}
+.uc span{display:block;background:var(--paper);text-align:center;letter-spacing:3px;font-size:17px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.bd{opacity:.88;filter:saturate(.75);width:88px;height:31px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;line-height:.9;color:#fff;border:2px solid;border-color:#fff #404040 #404040 #fff;outline:1px solid #000}
+.b1{background:#000080}.b2{background:#006400}.b3{background:linear-gradient(#e8e8e8,#888);color:#000}.b4{background:#800000}
+.cert{margin:12px 0 14px;padding:6px;border:3px solid var(--ink);background:var(--paper)}
+.cert-in{border:2px solid var(--ink);padding:12px 14px 10px;text-align:center;font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:1.3;
+  background:repeating-linear-gradient(45deg,rgba(20,20,26,.07) 0 2px,transparent 2px 7px)}
+.cert-in small{display:block;letter-spacing:.25em;font-size:12px}
+.cert-in strong{display:block;font-size:24px;font-variant:small-caps;letter-spacing:.06em;margin:2px 0 6px}
+.cert-in em{font-weight:700}
+.cert-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;font-style:italic}
+.seal{display:flex;width:44px;height:44px;flex:none;border-radius:50%;border:3px double var(--ink);background:var(--accent);align-items:center;justify-content:center;transform:rotate(-12deg);font-size:20px;font-style:normal}
+body::before{content:"";position:fixed;inset:0;z-index:800;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,0,.26)),repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px)}
+.win{animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(var(--i,0)*70ms)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
 body{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
 .menubar{overflow:hidden;white-space:nowrap;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
 .status{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
@@ -152,7 +180,7 @@ body{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inse
   body{padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}
   #pet{width:36px;height:36px}#bub{bottom:calc(60px + env(safe-area-inset-bottom,0px))}
 }
-@media(prefers-reduced-motion:reduce){.ticker span,.flash,#pet .eyes,#pet.hop{animation:none}html{scroll-behavior:auto}.type{animation:none;width:7ch;border-color:transparent}}
+@media(prefers-reduced-motion:reduce){.ticker span,.flash,.win,#pet .eyes,#pet.hop{animation:none}html{scroll-behavior:auto}.type{animation:none;width:7ch;border-color:transparent}}
 </style>
 </head>
 <body>
@@ -174,7 +202,9 @@ body{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inse
       <h1 id="hi">Hi, I'm <span class="type">Nikhil.</span></h1>
       <p class="lead">Computer Science student, curious about how things work and even more about what can be built with that understanding.</p>
       <span class="tag">Open to internships &amp; collabs</span>
+      <div class="meta"><span>Your visit no. <b id="visits">000001</b></span><span id="upd">Last updated: recently</span></div>
     </div>
+    <div class="marq ticker" aria-hidden="true"><span>★ WELCOME TO MY HOMEPAGE ★ BEST VIEWED AT 1024×768 ★ FACIENDO DISCIMUS ★ PLEASE SIGN THE GUESTBOOK ★ &nbsp;★ WELCOME TO MY HOMEPAGE ★ BEST VIEWED AT 1024×768 ★ FACIENDO DISCIMUS ★ PLEASE SIGN THE GUESTBOOK ★ </span></div>
   </section>
 
   <section class="win w7" id="about" aria-labelledby="h-about">
@@ -207,7 +237,7 @@ studying: DSA, systems, markets
   <section class="win w6" id="ml" aria-labelledby="h-ml">
     <div class="bar"><button class="x" type="button" aria-label="Close Machine Learning"></button><span class="t">ml.txt</span></div>
     <div class="body">
-      <h2 id="h-ml">Machine Learning</h2>
+      <h2 id="h-ml">Machine Learning <span class="new">NEW!</span></h2>
       <p>I'm exploring AI and ML the same way I learn everything else: build something, break it, then study why it works.</p>
       <dl>
         <div><dt>Approach</dt><dd>Projects and experiments first, theory alongside</dd></div>
@@ -223,8 +253,16 @@ studying: DSA, systems, markets
   <section class="win w6" id="finance" aria-labelledby="h-fin">
     <div class="bar"><button class="x" type="button" aria-label="Close Finance"></button><span class="t">finance.txt</span></div>
     <div class="body">
-      <h2 id="h-fin">Finance</h2>
+      <h2 id="h-fin">Finance <span class="new">NEW!</span></h2>
       <p>I like understanding how businesses make money and how technology creates value, and I follow markets to learn how that shows up in prices.</p>
+      <div class="cert" role="img" aria-label="Certificate of Curiosity: Nikhil is the registered holder of infinite shares in Long-Term Learning">
+        <div class="cert-in">
+          <small>★ SHARE CERTIFICATE ★</small>
+          <strong>Certificate of Curiosity</strong>
+          This certifies that <em>Nikhil</em> is the registered holder of <em>∞ shares</em> in Long-Term Learning, fully paid and compounding.
+          <div class="cert-foot"><span class="seal">★</span><span title="We learn by doing">Faciendo discimus</span></div>
+        </div>
+      </div>
       <dl>
         <div><dt>Studying</dt><dd>Markets and investments</dd></div>
         <div><dt>Thinking</dt><dd>Risk, returns, and business quality</dd></div>
@@ -246,6 +284,7 @@ studying: DSA, systems, markets
     <div class="bar"><button class="x" type="button" aria-label="Close Projects"></button><span class="t">Projects</span></div>
     <div class="body">
       <h2 id="h-proj">My Files</h2>
+      <div class="uc" role="img" aria-label="Under construction"><span>UNDER CONSTRUCTION</span></div>
       <p>Projects are in the pipeline. Follow along on GitHub to see them land.</p>
       <div class="files">
         <div class="file soon"><span class="ic"></span>project-01<small>in the pipeline</small></div>
@@ -271,6 +310,8 @@ studying: DSA, systems, markets
       <a href="https://github.com/AyanokojiK1yotaka" rel="me noopener">GitHub: AyanokojiK1yotaka</a>
       <a href="https://www.linkedin.com/in/nikhil-gowda-69os" rel="me noopener">LinkedIn: nikhil-gowda-69os</a>
       <a href="mailto:srinikhilgowda@gmail.com">Email: srinikhilgowda@gmail.com</a>
+      <a href="mailto:srinikhilgowda@gmail.com?subject=Guestbook%20entry&amp;body=Hi%20Nikhil%2C%20I%20visited%20your%20homepage!">Sign the guestbook</a>
+      <div class="badges" aria-hidden="true"><span class="bd b1">BEST VIEWED<br>1024×768</span><span class="bd b2">Y2K<br>COMPLIANT</span><span class="bd b3">NETSCAPE<br>NOW!</span><span class="bd b4" title="ring not found (404)">◀ WEBRING ▶</span></div>
       <small class="fine" style="margin-top:12px">made with <button id="heart" type="button" aria-label="Send love" style="padding:0 2px">♥</button> and too much coffee</small>
     </div>
   </section>
@@ -339,9 +380,9 @@ studying: DSA, systems, markets
   });
 
   // themes
-  var themes=['teal','plum','graphite'],root=document.documentElement,
+  var themes=['teal','plum','graphite','classic'],root=document.documentElement,
       meta=document.querySelector('meta[name=theme-color]'),
-      colors={teal:'#1f5f6b',plum:'#4d2a5c',graphite:'#2c2f33',gameboy:'#306230'};
+      colors={teal:'#1f5f6b',plum:'#4d2a5c',graphite:'#2c2f33',gameboy:'#306230',classic:'#008080'};
   function setTheme(t){root.dataset.theme=t;meta.content=colors[t];try{localStorage.setItem('theme',t)}catch(e){}}
   meta.content=colors[root.dataset.theme]||colors.teal;
   document.getElementById('theme').addEventListener('click',function(){
@@ -359,7 +400,7 @@ studying: DSA, systems, markets
     w.classList.remove('flash');void w.offsetWidth;w.classList.add('flash');return true;
   }
   var cmds={
-    help:function(){say('help about ml finance projects contact\nopen <window>  theme  clear\nwhoami  ls  date  fortune  sudo\nfun: cat coffee hack love party\n(there are a few secrets. poke around.)')},
+    help:function(){say('help about ml finance projects contact\nopen <window>  theme  clear\nwhoami  ls  date  fortune  sudo\nfun: cat coffee hack love party dialup y2k\n(there are a few secrets. poke around.)')},
     about:function(){say('Nikhil, CS student. Curious how things work, more curious what to build with that.')},
     ml:function(){say('Learning AI/ML by building. Opening ml.txt...');openWin('ml')},
     finance:function(){say('Markets, businesses, compounding. Opening finance.txt...');openWin('finance')},
@@ -445,7 +486,7 @@ studying: DSA, systems, markets
   }
   document.addEventListener('pointerdown',function(e){
     if(e.target.closest&&e.target.closest('input,canvas'))return;
-    fx(e.clientX,e.clientY,['\u2726','\u00b7','\u2727'],4);
+    fx(e.clientX,e.clientY,['\u2726','\u00b7','\u2727'],3);
   });
 
   // the cat
@@ -494,6 +535,25 @@ studying: DSA, systems, markets
   cmds.party=cmds.konami=function(){say('party!');party()};
   cmds.matrix=function(){say('wake up, nikhil...');matrix()};
   cmds.gameboy=function(){say('loading cartridge...');gameboy()};
+
+  wins.forEach(function(w,i){w.style.setProperty("--i",i)});
+  // 90s touches: visit counter, last-updated stamp, extra commands
+  (function(){
+    var n=1;
+    try{
+      n=+localStorage.getItem('visits')||0;
+      if(!sessionStorage.getItem('seen')){n++;localStorage.setItem('visits',n);sessionStorage.setItem('seen','1')}
+      n=n||1;
+    }catch(e){n=1}
+    document.getElementById('visits').textContent=('00000'+n).slice(-6);
+    var d=new Date(document.lastModified);
+    if(!isNaN(d))document.getElementById('upd').textContent='Last updated: '+d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  })();
+  cmds.dialup=function(){
+    say('ATDT 5551234');
+    [['CONNECT 56000',600],['(beeeeee-kssshhh-ding-ding...)',1300],["You've got mail!",2200]].forEach(function(l){setTimeout(function(){say(l[0])},l[1])});
+  };
+  cmds.y2k=function(){say('Y2K bug status: never found. Phew.')};
 
   // reset dragged windows when dragging becomes unavailable (rotate, resize, dock)
   function resetPos(){if(wide.matches)return;wins.forEach(function(w){w.style.transform='';w.dataset.x=w.dataset.y=0})}
