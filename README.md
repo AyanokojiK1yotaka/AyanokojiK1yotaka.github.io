@@ -15,6 +15,7 @@ and slide the numbers on the compounding calculator.
 - **Boot screen** on the first visit of a session (any key or tap skips it; it is turned off for reduced-motion users)
 - **Launcher** (`Ctrl+K`, `Cmd+K` or `/`) to open any window or run an action by typing
 - **Working terminal** with tab completion and command history
+- **Sound effects**: clicks, typing ticks, window open/close, themes and a few surprises, all synthesised in the browser with the Web Audio API, so there are no audio files to download. They are on by default and start after a visitor's first click or key press (browsers block audio before that). Mute with the ♪ button, `sound off` in the terminal, or the launcher; the choice is remembered
 - **Four themes** (`teal`, `plum`, `graphite`, `classic`), plus a switch for the CRT scanlines
 - **Machine learning toy**: click to add points and a line fits them live, with an R² score
 - **Compounding calculator**: monthly amount, years and yearly return, with a year-by-year chart
@@ -31,6 +32,7 @@ and slide the numbers on the compounding calculator.
 | `neofetch`, `stack`, `whoami`, `ls` | Quick facts about me and this site |
 | `email` | Copy my email address |
 | `crt` | Toggle the scanlines |
+| `sound [on\|off]` | Toggle sound effects |
 | `uptime`, `date`, `history`, `echo`, `clear` | The usual |
 | `reboot` | Replay the boot sequence |
 
@@ -75,7 +77,7 @@ If you fork it, these are the places to edit in `index.html`:
 ## Privacy
 
 No analytics, trackers or cookies. The browser's `localStorage` and `sessionStorage` are used only for small
-preferences (theme, scanlines, whether the boot screen has played) and the "visit no." counter,
+preferences (theme, scanlines, sound on/off, whether the boot screen has played) and the "visit no." counter,
 which counts visits in your own browser, not across all visitors.
 
 ## Contact
