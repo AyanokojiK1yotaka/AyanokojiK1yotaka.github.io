@@ -10,7 +10,14 @@
 <meta property="og:description" content="Computer Science student exploring AI/ML, Linux, systems, and finance.">
 <meta property="og:type" content="website">
 <meta name="author" content="Nikhil Gowda">
-<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://ayanokojik1yotaka.github.io/">
+<meta property="og:url" content="https://ayanokojik1yotaka.github.io/">
+<meta property="og:image" content="https://ayanokojik1yotaka.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ayanokojik1yotaka.github.io/og-image.png">
+<meta name="twitter:site" content="@Nikh1lGowda">
 <meta name="twitter:title" content="Nikhil.OS">
 <meta name="twitter:description" content="Computer Science student exploring AI/ML, Linux, systems, and finance.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>">
@@ -20,7 +27,7 @@
 <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
 try{if(localStorage.getItem('crt')==='off')document.documentElement.classList.add('no-crt')}catch(e){}
 try{if(!sessionStorage.getItem('boot')&&!matchMedia('(prefers-reduced-motion:reduce)').matches)document.documentElement.classList.add('booting')}catch(e){}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Nikhil Gowda","description":"Computer Science student in India exploring AI/ML, Linux, systems, and finance.","knowsAbout":["Machine learning","Linux","Computer systems","Finance and investing"],"affiliation":{"@type":"CollegeOrUniversity","name":"Sreyas Institute of Engineering and Technology"},"sameAs":["https://github.com/AyanokojiK1yotaka","https://www.linkedin.com/in/nikhil-gowda-69os"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Nikhil Gowda","url":"https://ayanokojik1yotaka.github.io/","description":"Computer Science student in India exploring AI/ML, Linux, systems, and finance.","knowsAbout":["Machine learning","Linux","Computer systems","Finance and investing"],"affiliation":{"@type":"CollegeOrUniversity","name":"Sreyas Institute of Engineering and Technology"},"sameAs":["https://github.com/AyanokojiK1yotaka","https://www.linkedin.com/in/nikhil-gowda-69os","https://x.com/Nikh1lGowda"]}</script>
 <style>
 :root{--a:#1f5f6b;--b:#256a77;--accent:#efb73e;--paper:#f7f7ef;--ink:#14141a;--font:'VT323','Courier New',monospace}
 [data-theme=plum]{--a:#4d2a5c;--b:#56316a;--accent:#7fe0c4}
@@ -190,6 +197,10 @@ body{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inse
 @media(prefers-reduced-motion:reduce){.ticker span,.flash,.win,#pet .eyes,#pet.hop{animation:none}html{scroll-behavior:auto}.type{animation:none;width:7ch;border-color:transparent}}
 
 /* ===== v2 additions ===== */
+#snd{font-size:1.15em;padding:0 9px}
+#snd[aria-pressed=false]{opacity:.5;text-decoration:line-through}
+#snd[aria-pressed=true]{background:var(--accent)}
+#snd[aria-pressed=true]:hover,#snd[aria-pressed=true]:focus-visible{background:var(--ink);color:var(--paper)}
 /* bug fixes: flash was overridden by .win's entrance animation; matrix canvas inherited the 150px chart sizing */
 .win.flash{animation:flash .9s steps(2,end) 2}
 .rain{width:100vw;height:100vh;height:100dvh;margin:0;border:0;background:#000;cursor:auto}
@@ -276,6 +287,7 @@ a.btn{display:inline-block;text-decoration:none;line-height:1.5}
   <b>◆ <span class="nm">Nikhil.OS</span></b>
   <button id="showAll" type="button">Show all</button>
   <button id="theme" type="button" aria-label="Change color theme">Theme</button>
+  <button id="snd" type="button" aria-pressed="false" aria-label="Sound effects" title="Sound effects (off)">&#9834;</button>
   <button id="go" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K">Go to&hellip;<span class="k" id="kbd" aria-hidden="true"></span></button>
   <span class="sp"></span>
   <time id="clock">--:--</time>
@@ -397,6 +409,7 @@ studying: DSA, systems, markets
       <h2 id="h-contact">Say hello</h2>
       <a href="https://github.com/AyanokojiK1yotaka" rel="me noopener">GitHub: AyanokojiK1yotaka</a>
       <a href="https://www.linkedin.com/in/nikhil-gowda-69os" rel="me noopener">LinkedIn: nikhil-gowda-69os</a>
+      <a href="https://x.com/Nikh1lGowda" rel="me noopener">X: @Nikh1lGowda</a>
       <div class="mailrow"><a href="mailto:srinikhilgowda@gmail.com">Email: srinikhilgowda@gmail.com</a><button class="btn" id="copyMail" type="button">Copy email</button></div>
       <a href="mailto:srinikhilgowda@gmail.com?subject=Guestbook%20entry&amp;body=Hi%20Nikhil%2C%20I%20visited%20your%20homepage!">Sign the guestbook</a>
       <div class="badges" aria-hidden="true"><span class="bd b1">BEST VIEWED<br>1024×768</span><span class="bd b2">Y2K<br>COMPLIANT</span><span class="bd b3">NETSCAPE<br>NOW!</span><span class="bd b4" title="ring not found (404)">◀ WEBRING ▶</span></div>
@@ -457,7 +470,7 @@ studying: DSA, systems, markets
     var bar=e.target.closest('.bar');
     if(!bar||e.target.closest('.x')||!wide.matches) return;
     cur={win:win,bar:bar,ox:+win.dataset.x||0,oy:+win.dataset.y||0,dx:0,dy:0};
-    sx=e.clientX;sy=e.clientY;win.classList.add('drag');bar.setPointerCapture(e.pointerId);
+    sx=e.clientX;sy=e.clientY;win.classList.add('drag');sfx('lift');bar.setPointerCapture(e.pointerId);
   });
   document.addEventListener('pointermove',function(e){
     if(!cur) return;
@@ -469,7 +482,7 @@ studying: DSA, systems, markets
   function end(){
     if(!cur) return;
     cur.win.dataset.x=cur.ox+cur.dx;cur.win.dataset.y=cur.oy+cur.dy;
-    cur.win.classList.remove('drag');cur=null;
+    cur.win.classList.remove('drag');sfx('drop');cur=null;
   }
   document.addEventListener('pointerup',end);
   document.addEventListener('pointercancel',end);
@@ -478,7 +491,7 @@ studying: DSA, systems, markets
     var a=e.target.closest('[data-go]');
     if(a){e.preventDefault();openWin(a.dataset.go);return}
     var x=e.target.closest('.x'),w=x&&x.closest('.win');
-    if(w){w.hidden=true;update();var b=tb[w.id];if(b)b.focus()}
+    if(w){w.hidden=true;sfx('close');update();var b=tb[w.id];if(b)b.focus()}
   });
   // double-click a title bar to snap a dragged window back
   document.addEventListener('dblclick',function(e){
@@ -498,7 +511,7 @@ studying: DSA, systems, markets
   var themes=['teal','plum','graphite','classic'],root=document.documentElement,
       meta=document.querySelector('meta[name=theme-color]'),
       colors={teal:'#1f5f6b',plum:'#4d2a5c',graphite:'#2c2f33',gameboy:'#306230',classic:'#008080'};
-  function setTheme(t){root.dataset.theme=t;meta.content=colors[t];try{localStorage.setItem('theme',t)}catch(e){}afterTheme()}
+  function setTheme(t){root.dataset.theme=t;meta.content=colors[t];try{localStorage.setItem('theme',t)}catch(e){}afterTheme();sfx('theme')}
   function afterTheme(){draw();drawGrowth()}
   meta.content=colors[root.dataset.theme]||colors.teal;
   document.getElementById('theme').addEventListener('click',function(){
@@ -511,13 +524,13 @@ studying: DSA, systems, markets
   function say(t){out.textContent+='\n'+t;out.scrollTop=out.scrollHeight}
   function openWin(id){
     var w=document.getElementById(id);if(!w)return false;
-    w.hidden=false;w.style.zIndex=++z;update();
+    w.hidden=false;w.style.zIndex=++z;update();sfx('open');
     w.scrollIntoView({behavior:calm?'auto':'smooth',block:'center'});
     w.setAttribute('tabindex','-1');w.focus({preventScroll:true});
     w.classList.remove('flash');void w.offsetWidth;w.classList.add('flash');return true;
   }
   var cmds={
-    help:function(){say('help about ml finance projects contact\nopen <window>  theme [name]  clear\nwhoami ls date uptime fortune neofetch\nstack email history echo crt reboot\nfun: cat coffee hack love party dialup y2k\nTab completes. Ctrl+K opens the launcher.\n(there are a few secrets. poke around.)')},
+    help:function(){say('help about ml finance projects contact\nopen <window>  theme [name]  clear\nwhoami ls date uptime fortune neofetch\nstack email history echo crt sound reboot\nfun: cat coffee hack love party dialup y2k\nTab completes. Ctrl+K opens the launcher.\n(there are a few secrets. poke around.)')},
     about:function(){say('Nikhil, CS student. Curious how things work, more curious what to build with that.')},
     ml:function(){say('Learning AI/ML by building. Opening ml.txt...');openWin('ml')},
     finance:function(){say('Markets, businesses, compounding. Opening finance.txt...');openWin('finance')},
@@ -604,7 +617,7 @@ studying: DSA, systems, markets
   }
   function size(){var d=devicePixelRatio||1;cv.width=cv.clientWidth*d;cv.height=cv.clientHeight*d;cx.setTransform(d,0,0,d,0,0);draw()}
   function seed(){pts=[];for(var i=1;i<=6;i++)pts.push([i*cv.clientWidth/7,cv.clientHeight*.8-i*cv.clientHeight/10+(Math.random()-.5)*34])}
-  cv.addEventListener('pointerdown',function(e){var r=cv.getBoundingClientRect();pts.push([e.clientX-r.left,e.clientY-r.top]);draw()});
+  cv.addEventListener('pointerdown',function(e){sfx('pop');var r=cv.getBoundingClientRect();pts.push([e.clientX-r.left,e.clientY-r.top]);draw()});
   document.getElementById('clr').addEventListener('click',function(){pts=[];draw()});
   document.getElementById('fresh').addEventListener('click',function(){seed();draw()});
   document.getElementById('add').addEventListener('click',function(){pts.push([20+Math.random()*(cv.clientWidth-40),20+Math.random()*(cv.clientHeight-40)]);draw()});
@@ -623,7 +636,7 @@ studying: DSA, systems, markets
       document.body.appendChild(e);
     }
   }
-  function confetti(n){
+  function confetti(n){sfx('party');
     if(calm)return;var c=['#f2b632','#f7f7ef','#14141a','#d94f3d','#7fe0c4'];
     for(var i=0;i<n;i++){
       var e=document.createElement('i');e.className='cf';
@@ -639,17 +652,17 @@ studying: DSA, systems, markets
 
   // the cat
   var pet=document.getElementById('pet'),bub=document.getElementById('bub'),pc=0,bt;
-  var meows=['meow!','mrrp?','pspsps','purr purr','try the terminal?','feed me commits','nice mouse skills','I run on treats'];
+  var meows=['tap the \u266a button to mute','meow!','mrrp?','pspsps','purr purr','try the terminal?','feed me commits','nice mouse skills','I run on treats'];
   function meow(t){bub.textContent=t;bub.classList.add('on');clearTimeout(bt);bt=setTimeout(function(){bub.classList.remove('on')},2400)}
   function party(){confetti(90);meow('+30 lives!')}
   pet.addEventListener('click',function(){
-    pc++;pet.classList.remove('hop');void pet.offsetWidth;pet.classList.add('hop');
+    pc++;sfx('meow');pet.classList.remove('hop');void pet.offsetWidth;pet.classList.add('hop');
     var r=pet.getBoundingClientRect();fx(r.left+r.width/2,r.top,['\u2665'],3);
     if(pc%10===0){meow('party time!');confetti(60)}else meow(meows[Math.floor(Math.random()*meows.length)]);
   });
 
   // secret theme: click the logo 5 times, or type gameboy
-  function gameboy(){setTheme('gameboy');meow('secret theme unlocked!');draw()}
+  function gameboy(){setTheme('gameboy');sfx('chime');meow('secret theme unlocked!');draw()}
   var lc=0;document.querySelector('.menubar b').addEventListener('click',function(){if(++lc===5){lc=0;gameboy()}});
 
   // konami code
@@ -709,7 +722,7 @@ studying: DSA, systems, markets
 
   // ---- v2: terminal extras ----
   var themeNames=['teal','plum','graphite','classic'],t0=Date.now(),
-      tabs=['help','about','ml','finance','projects','contact','open','whoami','ls','date','uptime','fortune','neofetch','stack','email','history','echo','crt','reboot','theme','clear','cat','coffee','dialup','party'];
+      tabs=['help','about','ml','finance','projects','contact','open','whoami','ls','date','uptime','fortune','neofetch','stack','email','history','echo','crt','sound','reboot','theme','clear','cat','coffee','dialup','party'];
   cmds.theme=function(a){
     if(a[0]){
       if(themeNames.indexOf(a[0])<0){say('theme: try '+themeNames.join(', '));return}
@@ -742,7 +755,7 @@ studying: DSA, systems, markets
   function mailAddr(){return document.querySelector('a[href^="mailto:"]').getAttribute('href').replace('mailto:','').split('?')[0]}
   function copyMail(){
     var btn=document.getElementById('copyMail'),addr=mailAddr();
-    function ok(){meow('email copied');if(btn){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy email'},1600)}say('copied '+addr)}
+    function ok(){sfx('pop');meow('email copied');if(btn){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy email'},1600)}say('copied '+addr)}
     function fail(){meow('copy failed, select it by hand');say('copy failed: '+addr)}
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(addr).then(ok,fail);return}
     try{var t=document.createElement('textarea');t.value=addr;t.setAttribute('readonly','');t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();var r=document.execCommand('copy');t.remove();r?ok():fail()}catch(e){fail()}
@@ -759,8 +772,10 @@ studying: DSA, systems, markets
       {t:'Show all windows',run:function(){document.getElementById('showAll').click()}},
       {t:'Change theme',run:function(){document.getElementById('theme').click()}},
       {t:'Toggle scanlines',run:function(){toggleCrt()}},
+      {t:'Toggle sound effects',run:function(){setSound(!snd.on)}},
       {t:'Copy email address',run:copyMail},
       {t:'Open GitHub',run:function(){window.open('https://github.com/AyanokojiK1yotaka','_blank','noopener')}},
+      {t:'Open X (Twitter)',run:function(){window.open('https://x.com/Nikh1lGowda','_blank','noopener')}},
       {t:'Open LinkedIn',run:function(){window.open('https://www.linkedin.com/in/nikhil-gowda-69os','_blank','noopener')}},
       {t:'Replay boot sequence',run:function(){boot(true)}}
     ]);
@@ -778,14 +793,15 @@ studying: DSA, systems, markets
     palIn.setAttribute('aria-activedescendant','pal-'+sel);
   }
   function movePal(d){
+    sfx('tick');
     if(!shown.length)return;
     sel=(sel+d+shown.length)%shown.length;
     [].forEach.call(palList.children,function(li,i){li.setAttribute('aria-selected',i===sel)});
     palIn.setAttribute('aria-activedescendant','pal-'+sel);
     palList.children[sel].scrollIntoView({block:'nearest'});
   }
-  function runPal(i){var it=shown[i];if(!it)return;pal.close();it.run()}
-  function openPal(){if(!pal.showModal||pal.open)return;palIn.value='';sel=0;renderPal();pal.showModal();palIn.focus()}
+  function runPal(i){var it=shown[i];if(!it)return;sfx('enter');pal.close();it.run()}
+  function openPal(){if(!pal.showModal||pal.open)return;sfx('pop');palIn.value='';sel=0;renderPal();pal.showModal();palIn.focus()}
   if(pal.showModal){
     go.addEventListener('click',openPal);
     document.getElementById('palX').addEventListener('click',function(){pal.close()});
@@ -820,7 +836,7 @@ studying: DSA, systems, markets
       });
     }
     function clean(data){
-      return (Array.isArray(data)?data:[]).filter(function(r){return r&&!r.fork&&!r.archived&&r.name!=='AyanokojiK1yotaka'&&/^https:\/\/github\.com\//.test(r.html_url)}).slice(0,6)
+      return (Array.isArray(data)?data:[]).filter(function(r){return r&&!r.fork&&!r.archived&&r.name!=='AyanokojiK1yotaka'&&!/\.github\.io$/i.test(r.name)&&/^https:\/\/github\.com\//.test(r.html_url)}).slice(0,6)
         .map(function(r){return {name:String(r.name),html_url:r.html_url,description:r.description,language:r.language,stargazers_count:r.stargazers_count}});
     }
     try{var c=JSON.parse(sessionStorage.getItem(KEY));if(c&&c.length){render(c);return}}catch(e){}
@@ -845,13 +861,103 @@ studying: DSA, systems, markets
       document.removeEventListener('keydown',done);document.removeEventListener('pointerdown',done);
     }
     function step(){
-      if(i<bootLines.length){tx.textContent+=(i?'\n':'')+bootLines[i++];bootTimer=setTimeout(step,i===bootLines.length?400:190)}
+      if(i<bootLines.length){sfx(i===bootLines.length-1?'chime':'boot');tx.textContent+=(i?'\n':'')+bootLines[i++];bootTimer=setTimeout(step,i===bootLines.length?400:190)}
       else done();
     }
     setTimeout(function(){document.addEventListener('keydown',done);document.addEventListener('pointerdown',done)},0);
     step();
   }
   boot(false);
+
+  // ---- v2: sound effects (synthesised with Web Audio, on by default) ----
+  var snd={on:true,ctx:null,master:null,noise:null,last:{}};
+  try{snd.on=localStorage.getItem('sound')!=='off'}catch(e){}
+  function audio(){
+    if(!snd.on||document.hidden)return null;
+    // browsers only allow audio after the visitor's first click, tap or key press
+    if(navigator.userActivation&&!navigator.userActivation.hasBeenActive)return null;
+    var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;
+    try{
+      if(!snd.ctx){
+        var c=snd.ctx=new AC(),comp=c.createDynamicsCompressor();
+        snd.master=c.createGain();snd.master.gain.value=2.2;snd.master.connect(comp);comp.connect(c.destination);
+        var n=c.createBuffer(1,c.sampleRate*.5,c.sampleRate),d=n.getChannelData(0);
+        for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1;snd.noise=n;
+      }
+      if(snd.ctx.state==='suspended'&&snd.ctx.resume)snd.ctx.resume();
+    }catch(e){return null}
+    return snd.ctx;
+  }
+  function tone(f0,f1,dur,type,gain,delay){
+    var c=snd.ctx,t=c.currentTime+(delay||0),o=c.createOscillator(),g=c.createGain();
+    o.type=type||'sine';o.frequency.setValueAtTime(f0,t);if(f1)o.frequency.exponentialRampToValueAtTime(f1,t+dur);
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(gain,t+.006);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(g);g.connect(snd.master);o.start(t);o.stop(t+dur+.03);
+  }
+  function burst(dur,gain,hp,delay){
+    var c=snd.ctx,t=c.currentTime+(delay||0),s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();
+    s.buffer=snd.noise;f.type='highpass';f.frequency.value=hp;
+    g.gain.setValueAtTime(gain,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    s.connect(f);f.connect(g);g.connect(snd.master);s.start(t);s.stop(t+dur+.02);
+  }
+  var FX={
+    click:function(){burst(.03,.3,2500);tone(1900,1300,.05,'sine',.1)},
+    tick:function(){burst(.016,.2,3500);tone(1900+Math.random()*500,0,.02,'sine',.04)},
+    enter:function(){tone(520,780,.09,'triangle',.12);burst(.02,.15,2000)},
+    open:function(){tone(420,780,.12,'sine',.16)},
+    close:function(){tone(640,360,.12,'sine',.14)},
+    pop:function(){tone(420,900,.09,'sine',.18)},
+    theme:function(){tone(660,0,.1,'triangle',.13);tone(880,0,.15,'triangle',.11,.07)},
+    lift:function(){tone(300,520,.08,'sine',.1)},
+    drop:function(){tone(210,110,.12,'sine',.16);burst(.02,.18,800)},
+    slide:function(){tone(1200,0,.02,'square',.03)},
+    boot:function(){tone(1000,0,.05,'square',.04)},
+    chime:function(){tone(660,0,.35,'sine',.13);tone(990,0,.5,'sine',.1,.09)},
+    party:function(){[784,988,1175,1568].forEach(function(f,i){tone(f,0,.22,'triangle',.1,i*.06)});burst(.25,.12,4500,.18)},
+    meow:function(){
+      var c=snd.ctx,t=c.currentTime,o=c.createOscillator(),g=c.createGain(),f=c.createBiquadFilter();
+      o.type='sawtooth';f.type='lowpass';f.frequency.value=1800;
+      o.frequency.setValueAtTime(620,t);o.frequency.linearRampToValueAtTime(1020,t+.12);o.frequency.linearRampToValueAtTime(640,t+.3);
+      g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.09,t+.04);g.gain.exponentialRampToValueAtTime(.0001,t+.32);
+      o.connect(f);f.connect(g);g.connect(snd.master);o.start(t);o.stop(t+.35);
+    }
+  },GAP={tick:28,click:30,slide:45,boot:60};
+  function sfx(name){
+    if(typeof snd==='undefined'||!snd||!FX||!snd.on)return;
+    var fn=FX[name];if(!fn)return;
+    var now=Date.now(),gap=GAP[name]||0;
+    if(gap&&now-(snd.last[name]||0)<gap)return;snd.last[name]=now;
+    if(!audio())return;
+    try{fn()}catch(e){}
+  }
+  function setSound(on){
+    snd.on=!!on;try{localStorage.setItem('sound',on?'on':'off')}catch(e){}
+    var b=document.getElementById('snd');b.setAttribute('aria-pressed',snd.on);b.title='Sound effects ('+(snd.on?'on':'off')+')';
+    if(snd.on)sfx('pop');
+    meow(snd.on?'sound on \u266a':'sound off');
+  }
+  (function(){
+    var b=document.getElementById('snd');
+    b.setAttribute('aria-pressed',snd.on);b.title='Sound effects ('+(snd.on?'on':'off')+')';
+    b.addEventListener('click',function(){setSound(!snd.on)});
+    // click sound for buttons, links, files, options (the toggle itself and the cat make their own sounds)
+    document.addEventListener('pointerdown',function(e){
+      var t=e.target.closest&&e.target.closest('button,a,.btn,.file,[role=option],.x');
+      if(t&&t.id!=='snd'&&t.id!=='pet'&&t.id!=='copyMail')sfx('click');
+    });
+    // typing sounds in the terminal and launcher
+    [cmd,document.getElementById('palIn')].forEach(function(inp){
+      inp.addEventListener('keydown',function(e){
+        if(e.key==='Enter'){if(inp===cmd)sfx('enter')}
+        else if(e.key.length===1&&!e.ctrlKey&&!e.metaKey)sfx('tick');
+      });
+    });
+    [iM,iY,iR].forEach(function(i){i.addEventListener('input',function(){sfx('slide')})});
+  })();
+  cmds.sound=function(a){
+    var v=(a[0]||'').toLowerCase();setSound(v==='on'?true:v==='off'?false:!snd.on);
+    say('sound: '+(snd.on?'on':'off'));
+  };
 
   try{console.log('%cHi dev! Found the console. Try: up up down down left right left right b a','font:16px monospace')}catch(e){}
 })();
