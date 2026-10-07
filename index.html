@@ -9,11 +9,18 @@
 <meta property="og:title" content="Nikhil.OS">
 <meta property="og:description" content="Computer Science student exploring AI/ML, Linux, systems, and finance.">
 <meta property="og:type" content="website">
+<meta name="author" content="Nikhil Gowda">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nikhil.OS">
+<meta name="twitter:description" content="Computer Science student exploring AI/ML, Linux, systems, and finance.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
-<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+try{if(localStorage.getItem('crt')==='off')document.documentElement.classList.add('no-crt')}catch(e){}
+try{if(!sessionStorage.getItem('boot')&&!matchMedia('(prefers-reduced-motion:reduce)').matches)document.documentElement.classList.add('booting')}catch(e){}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Nikhil Gowda","description":"Computer Science student in India exploring AI/ML, Linux, systems, and finance.","knowsAbout":["Machine learning","Linux","Computer systems","Finance and investing"],"affiliation":{"@type":"CollegeOrUniversity","name":"Sreyas Institute of Engineering and Technology"},"sameAs":["https://github.com/AyanokojiK1yotaka","https://www.linkedin.com/in/nikhil-gowda-69os"]}</script>
 <style>
 :root{--a:#1f5f6b;--b:#256a77;--accent:#efb73e;--paper:#f7f7ef;--ink:#14141a;--font:'VT323','Courier New',monospace}
 [data-theme=plum]{--a:#4d2a5c;--b:#56316a;--accent:#7fe0c4}
@@ -181,15 +188,95 @@ body{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inse
   #pet{width:36px;height:36px}#bub{bottom:calc(60px + env(safe-area-inset-bottom,0px))}
 }
 @media(prefers-reduced-motion:reduce){.ticker span,.flash,.win,#pet .eyes,#pet.hop{animation:none}html{scroll-behavior:auto}.type{animation:none;width:7ch;border-color:transparent}}
+
+/* ===== v2 additions ===== */
+/* bug fixes: flash was overridden by .win's entrance animation; matrix canvas inherited the 150px chart sizing */
+.win.flash{animation:flash .9s steps(2,end) 2}
+.rain{width:100vw;height:100vh;height:100dvh;margin:0;border:0;background:#000;cursor:auto}
+
+/* CRT overlay can be switched off */
+.no-crt body::before{display:none}
+
+/* hero calls to action */
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+a.btn{display:inline-block;text-decoration:none;line-height:1.5}
+.btn:hover,.btn:focus-visible{background:var(--ink);color:var(--paper)}
+
+/* taskbar */
+.status{align-items:center}
+.tasks{display:flex;gap:4px;min-width:0;flex:0 1 auto;overflow-x:auto;scrollbar-width:none;padding:2px 0}
+.tasks::-webkit-scrollbar{display:none}
+.tasks button{flex:none;border:2px solid var(--ink);padding:0 8px;line-height:1.1;background:var(--paper)}
+.tasks button[data-open=true]{background:var(--accent)}
+.tasks button[data-open=false]{border-style:dashed;opacity:.75}
+.tasks button:hover,.tasks button:focus-visible{background:var(--ink);color:var(--paper);opacity:1}
+.status .ticker{display:none;margin:0 14px}
+.status #count{flex:none;white-space:nowrap}
+@media(min-width:1100px){.status .ticker{display:block}}
+@media(max-width:700px){.status #count{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}}
+@media(pointer:coarse){.tasks button{min-height:34px}}
+.ticker:hover span{animation-play-state:paused}
+
+/* launcher */
+.menubar .k{opacity:.6;font-size:17px;margin-left:6px;display:none}
+@media(min-width:900px){.menubar .k{display:inline}}
+@media(max-width:480px){.menubar .nm{display:none}}
+@media(max-width:400px){.menubar time{display:none}}
+.pal{padding:0;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:inherit;
+  width:min(540px,calc(100vw - 24px));margin:12vh auto auto;box-shadow:5px 5px 0 var(--ink);box-shadow:5px 5px 0 color-mix(in srgb,var(--ink) 55%,transparent)}
+.pal::backdrop{background:rgba(0,0,0,.45)}
+.pal .body{padding:14px 16px 16px}
+.palq{display:flex;gap:8px;background:var(--ink);color:var(--accent);padding:6px 10px}
+.palq input{flex:1;min-width:0;background:none;border:0;color:inherit;font:inherit;caret-color:var(--accent);outline:none}
+.palq:focus-within{outline:3px dashed var(--accent);outline-offset:2px}
+#palList{list-style:none;margin:8px 0;padding:0;max-height:min(46vh,320px);overflow:auto}
+#palList li{padding:1px 8px;cursor:pointer}
+#palList li[aria-selected=true]{background:var(--ink);color:var(--paper)}
+#palList li.none{cursor:default;opacity:.7}
+[data-theme=classic] .pal{border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:2px 2px 0 #000,inset 1px 1px 0 #dfdfdf}
+
+/* boot screen (first visit of a session, any key skips) */
+#boot{display:none;position:fixed;inset:0;z-index:3000;background:var(--ink);color:var(--accent);flex-direction:column;justify-content:space-between;
+  padding:calc(28px + env(safe-area-inset-top,0px)) 24px calc(24px + env(safe-area-inset-bottom,0px));font-size:26px;cursor:pointer}
+#boot pre{background:none;color:inherit;padding:0}
+#bootText::after{content:"\2588";animation:cur .8s steps(1) infinite}
+@keyframes cur{50%{opacity:0}}
+.bootskip{opacity:.6;font-size:20px}
+.booting #boot{display:flex;animation:bootfail 0s linear 4s forwards}
+@keyframes bootfail{to{visibility:hidden}}
+.bootrun .win,.bootrun .type{animation-play-state:paused}
+.booting{overflow:hidden}
+
+/* live repos in My Files */
+.files{grid-template-columns:repeat(auto-fill,minmax(124px,1fr))}
+.file{overflow-wrap:anywhere}
+.file small{font-size:.8em}
+
+/* ml + finance charts */
+.plotbar{flex-wrap:wrap}
+.btns{display:flex;flex-wrap:wrap;gap:6px}
+#growth{height:96px;cursor:default;margin-top:10px}
+.mailrow{display:flex;align-items:center;flex-wrap:wrap;gap:4px 12px}
+.mailrow a{flex:1 1 auto}
+
+@media(prefers-reduced-motion:reduce){.win.flash{animation:none}.ticker:hover span{animation:none}#bootText::after{animation:none}}
+@media print{
+  body{background:#fff;padding:0;font-size:16px}
+  body::before,.menubar,.status,#pet,#bub,.skip,.rain,#boot,.pal,.cta,.btns,.btn,.badges,.marq,.uc,canvas{display:none!important}
+  .desktop{display:block;padding:0}
+  .win{box-shadow:none;animation:none;break-inside:avoid;margin-bottom:14px;transform:none!important}
+  .links a::after{content:" (" attr(href) ")";font-size:.8em}
+}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="menubar">
-  <b>◆ Nikhil.OS</b>
+  <b>◆ <span class="nm">Nikhil.OS</span></b>
   <button id="showAll" type="button">Show all</button>
   <button id="theme" type="button" aria-label="Change color theme">Theme</button>
+  <button id="go" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K">Go to&hellip;<span class="k" id="kbd" aria-hidden="true"></span></button>
   <span class="sp"></span>
   <time id="clock">--:--</time>
 </header>
@@ -202,6 +289,7 @@ body{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inse
       <h1 id="hi">Hi, I'm <span class="type">Nikhil.</span></h1>
       <p class="lead">Computer Science student, curious about how things work and even more about what can be built with that understanding.</p>
       <span class="tag">Open to internships &amp; collabs</span>
+      <div class="cta"><a class="btn" href="#contact" data-go="contact">Say hello</a><a class="btn" href="#projects" data-go="projects">See projects</a></div>
       <div class="meta"><span>Your visit no. <b id="visits">000001</b></span><span id="upd">Last updated: recently</span></div>
     </div>
     <div class="marq ticker" aria-hidden="true"><span>★ WELCOME TO MY HOMEPAGE ★ BEST VIEWED AT 1024×768 ★ FACIENDO DISCIMUS ★ PLEASE SIGN THE GUESTBOOK ★ &nbsp;★ WELCOME TO MY HOMEPAGE ★ BEST VIEWED AT 1024×768 ★ FACIENDO DISCIMUS ★ PLEASE SIGN THE GUESTBOOK ★ </span></div>
@@ -246,7 +334,7 @@ studying: DSA, systems, markets
         <div><dt>Latest</dt><dd>Work in progress</dd></div>
       </dl>
       <canvas id="plot" aria-label="Click to add points; a line is fitted to them live"></canvas>
-      <div class="plotbar"><small class="fine" id="fit">Click the box to add data. A line learns it live.</small><button class="btn" id="clr" type="button">Reset</button></div>
+      <div class="plotbar"><small class="fine" id="fit">Click the box to add data. A line learns it live.</small><span class="btns"><button class="btn" id="add" type="button">Add point</button><button class="btn" id="fresh" type="button">New data</button><button class="btn" id="clr" type="button">Clear</button></span></div>
     </div>
   </section>
 
@@ -274,8 +362,8 @@ studying: DSA, systems, markets
         <label>Years <output id="oY"></output></label><input id="iY" type="range" min="1" max="40" value="15" aria-label="Years">
         <label>Yearly return <output id="oR"></output></label><input id="iR" type="range" min="4" max="18" value="12" aria-label="Assumed yearly return percent">
         <p style="margin:6px 0 0"><b id="res"></b></p>
-        <div class="meter" aria-hidden="true"><i id="bar"></i><b></b></div>
-        <small class="fine">White is what you put in, yellow is growth. A toy to feel compounding, not a forecast or advice.</small>
+        <canvas id="growth" role="img" aria-label="Bar chart of your invested amount and growth, year by year"></canvas>
+        <small class="fine">Dark is what you put in, bright is growth. A toy to feel compounding, not a forecast or advice.</small>
       </div>
     </div>
   </section>
@@ -284,13 +372,13 @@ studying: DSA, systems, markets
     <div class="bar"><button class="x" type="button" aria-label="Close Projects"></button><span class="t">Projects</span></div>
     <div class="body">
       <h2 id="h-proj">My Files</h2>
-      <div class="uc" role="img" aria-label="Under construction"><span>UNDER CONSTRUCTION</span></div>
-      <p>Projects are in the pipeline. Follow along on GitHub to see them land.</p>
-      <div class="files">
+      <div class="uc" id="uc" role="img" aria-label="Under construction"><span>UNDER CONSTRUCTION</span></div>
+      <p id="projNote">Projects are in the pipeline. Follow along on GitHub to see them land.</p>
+      <div class="files" id="files">
         <div class="file soon"><span class="ic"></span>project-01<small>in the pipeline</small></div>
         <div class="file soon"><span class="ic"></span>project-02<small>in the pipeline</small></div>
         <div class="file soon"><span class="ic"></span>project-03<small>in the pipeline</small></div>
-        <a class="file" href="https://github.com/AyanokojiK1yotaka"><span class="ic"></span>more.dir<small>all repositories</small></a>
+        <a class="file" id="moreDir" href="https://github.com/AyanokojiK1yotaka"><span class="ic"></span>more.dir<small>all repositories</small></a>
       </div>
     </div>
   </section>
@@ -309,7 +397,7 @@ studying: DSA, systems, markets
       <h2 id="h-contact">Say hello</h2>
       <a href="https://github.com/AyanokojiK1yotaka" rel="me noopener">GitHub: AyanokojiK1yotaka</a>
       <a href="https://www.linkedin.com/in/nikhil-gowda-69os" rel="me noopener">LinkedIn: nikhil-gowda-69os</a>
-      <a href="mailto:srinikhilgowda@gmail.com">Email: srinikhilgowda@gmail.com</a>
+      <div class="mailrow"><a href="mailto:srinikhilgowda@gmail.com">Email: srinikhilgowda@gmail.com</a><button class="btn" id="copyMail" type="button">Copy email</button></div>
       <a href="mailto:srinikhilgowda@gmail.com?subject=Guestbook%20entry&amp;body=Hi%20Nikhil%2C%20I%20visited%20your%20homepage!">Sign the guestbook</a>
       <div class="badges" aria-hidden="true"><span class="bd b1">BEST VIEWED<br>1024×768</span><span class="bd b2">Y2K<br>COMPLIANT</span><span class="bd b3">NETSCAPE<br>NOW!</span><span class="bd b4" title="ring not found (404)">◀ WEBRING ▶</span></div>
       <small class="fine" style="margin-top:12px">made with <button id="heart" type="button" aria-label="Send love" style="padding:0 2px">♥</button> and too much coffee</small>
@@ -321,7 +409,18 @@ studying: DSA, systems, markets
 <button id="pet" type="button" aria-label="Pet the cat"><svg viewBox="0 0 16 16" aria-hidden="true"><g style="fill:var(--ink)"><rect x="3" y="2" width="2" height="2"/><rect x="11" y="2" width="2" height="2"/><rect x="3" y="4" width="10" height="6"/><rect x="4" y="10" width="8" height="5"/><rect x="12" y="11" width="3" height="1"/><rect x="14" y="8" width="1" height="4"/></g><g class="eyes" style="fill:var(--accent)"><rect x="5" y="6" width="2" height="2"/><rect x="9" y="6" width="2" height="2"/></g><rect x="7" y="8" width="2" height="1" fill="#ff8fa3"/></svg></button>
 <div id="bub" role="status"></div>
 
-<footer class="status"><span id="count" role="status" aria-live="polite"></span><span class="ticker hint" aria-hidden="true"><span>▲ CURIOSITY +∞% · ▲ COMPOUNDING (LONG TERM) · ▼ SLEEP -12% · ▲ RASPBERRY PI +1 · ▲ COMMITS +3 · NOT FINANCIAL ADVICE · &nbsp;▲ CURIOSITY +∞% · ▲ COMPOUNDING (LONG TERM) · ▼ SLEEP -12% · ▲ RASPBERRY PI +1 · ▲ COMMITS +3 · NOT FINANCIAL ADVICE · </span></span></footer>
+<footer class="status"><nav class="tasks" id="tasks" aria-label="Windows"></nav><span class="ticker hint" aria-hidden="true"><span>▲ CURIOSITY +∞% · ▲ COMPOUNDING (LONG TERM) · ▼ SLEEP -12% · ▲ RASPBERRY PI +1 · ▲ COMMITS +3 · NOT FINANCIAL ADVICE · &nbsp;▲ CURIOSITY +∞% · ▲ COMPOUNDING (LONG TERM) · ▼ SLEEP -12% · ▲ RASPBERRY PI +1 · ▲ COMMITS +3 · NOT FINANCIAL ADVICE · </span></span><span id="count" role="status" aria-live="polite"></span></footer>
+
+<dialog class="pal" id="pal" aria-label="Go to">
+  <div class="bar"><button class="x" id="palX" type="button" aria-label="Close launcher"></button><span class="t">Go to</span></div>
+  <div class="body">
+    <label class="palq"><span aria-hidden="true">&gt;</span><input id="palIn" role="combobox" aria-expanded="true" aria-controls="palList" aria-autocomplete="list" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="window or command" aria-label="Search windows and commands"></label>
+    <ul id="palList" role="listbox" aria-label="Results"></ul>
+    <small class="fine">Up and down to move, Enter to run, Esc to close.</small>
+  </div>
+</dialog>
+
+<div id="boot" aria-hidden="true"><pre id="bootText"></pre><span class="bootskip">press any key or tap to skip</span></div>
 
 <script>
 (function(){
@@ -336,10 +435,17 @@ studying: DSA, systems, markets
   var T=document.title;document.addEventListener('visibilitychange',function(){document.title=document.hidden?'Come back! 🥺':T;document.hidden?clearInterval(timer):run()});
   run();
 
-  // window count
+  // taskbar: one button per window, shows open/closed, click to open or bring to front
+  var names={welcome:'welcome',about:'about',now:'terminal',ml:'ml',finance:'finance',projects:'files',tools:'tools',contact:'contact'},
+      tasks=document.getElementById('tasks'),tb={};
+  wins.forEach(function(w){
+    var b=document.createElement('button');b.type='button';b.textContent=names[w.id]||w.id;
+    b.addEventListener('click',function(){openWin(w.id)});tasks.appendChild(b);tb[w.id]=b;
+  });
   function update(){
     var n=wins.filter(function(w){return !w.hidden}).length;
-    count.textContent=n?n+(n===1?' window open':' windows open'):'All windows closed. Choose Show all to bring them back.';
+    wins.forEach(function(w){var b=tb[w.id],o=!w.hidden;b.dataset.open=o;b.setAttribute('aria-label',(names[w.id]||w.id)+(o?', open':', closed'))});
+    count.textContent=n?n+' of '+wins.length+(n===1?' window open':' windows open'):'All windows closed. Choose Show all to bring them back.';
   }
   update();
 
@@ -369,8 +475,17 @@ studying: DSA, systems, markets
   document.addEventListener('pointercancel',end);
 
   document.addEventListener('click',function(e){
-    var x=e.target.closest('.x');
-    if(x){x.closest('.win').hidden=true;update();}
+    var a=e.target.closest('[data-go]');
+    if(a){e.preventDefault();openWin(a.dataset.go);return}
+    var x=e.target.closest('.x'),w=x&&x.closest('.win');
+    if(w){w.hidden=true;update();var b=tb[w.id];if(b)b.focus()}
+  });
+  // double-click a title bar to snap a dragged window back
+  document.addEventListener('dblclick',function(e){
+    var bar=e.target.closest&&e.target.closest('.bar');
+    if(!bar||e.target.closest('.x'))return;
+    var w=bar.closest('.win');if(!w)return;
+    w.style.transform='';w.dataset.x=w.dataset.y=0;
   });
 
   // show all: reopen and reset positions
@@ -383,7 +498,8 @@ studying: DSA, systems, markets
   var themes=['teal','plum','graphite','classic'],root=document.documentElement,
       meta=document.querySelector('meta[name=theme-color]'),
       colors={teal:'#1f5f6b',plum:'#4d2a5c',graphite:'#2c2f33',gameboy:'#306230',classic:'#008080'};
-  function setTheme(t){root.dataset.theme=t;meta.content=colors[t];try{localStorage.setItem('theme',t)}catch(e){}}
+  function setTheme(t){root.dataset.theme=t;meta.content=colors[t];try{localStorage.setItem('theme',t)}catch(e){}afterTheme()}
+  function afterTheme(){draw();drawGrowth()}
   meta.content=colors[root.dataset.theme]||colors.teal;
   document.getElementById('theme').addEventListener('click',function(){
     setTheme(themes[(themes.indexOf(root.dataset.theme)+1)%themes.length]);
@@ -396,11 +512,12 @@ studying: DSA, systems, markets
   function openWin(id){
     var w=document.getElementById(id);if(!w)return false;
     w.hidden=false;w.style.zIndex=++z;update();
-    w.scrollIntoView({behavior:'smooth',block:'center'});
+    w.scrollIntoView({behavior:calm?'auto':'smooth',block:'center'});
+    w.setAttribute('tabindex','-1');w.focus({preventScroll:true});
     w.classList.remove('flash');void w.offsetWidth;w.classList.add('flash');return true;
   }
   var cmds={
-    help:function(){say('help about ml finance projects contact\nopen <window>  theme  clear\nwhoami  ls  date  fortune  sudo\nfun: cat coffee hack love party dialup y2k\n(there are a few secrets. poke around.)')},
+    help:function(){say('help about ml finance projects contact\nopen <window>  theme [name]  clear\nwhoami ls date uptime fortune neofetch\nstack email history echo crt reboot\nfun: cat coffee hack love party dialup y2k\nTab completes. Ctrl+K opens the launcher.\n(there are a few secrets. poke around.)')},
     about:function(){say('Nikhil, CS student. Curious how things work, more curious what to build with that.')},
     ml:function(){say('Learning AI/ML by building. Opening ml.txt...');openWin('ml')},
     finance:function(){say('Markets, businesses, compounding. Opening finance.txt...');openWin('finance')},
@@ -417,24 +534,51 @@ studying: DSA, systems, markets
   cmd.addEventListener('keydown',function(e){
     if(e.key==='ArrowUp'&&hist.length){hi=Math.max(0,hi-1);cmd.value=hist[hi];e.preventDefault();return}
     if(e.key==='ArrowDown'){hi=Math.min(hist.length,hi+1);cmd.value=hist[hi]||'';return}
+    if(e.key==='Tab'){
+      var tv=cmd.value,tp=tv.split(/\s+/),tw=tp[tp.length-1].toLowerCase(),t0w=tp[0].toLowerCase();
+      if(!tw)return;
+      var pool=tp.length>1?(t0w==='open'?Object.keys(ids):t0w==='theme'?themeNames:[]):tabs;
+      var m=pool.filter(function(c){return c.indexOf(tw)===0});
+      if(!m.length)return;
+      e.preventDefault();
+      if(m.length===1){tp[tp.length-1]=m[0];cmd.value=tp.join(' ')+(tp.length===1&&(m[0]==='open'||m[0]==='theme')?' ':'')}
+      else say(m.join('  '));
+      return;
+    }
     if(e.key!=='Enter')return;
     var v=cmd.value.trim(),a=v.toLowerCase().split(/\s+/);cmd.value='';
     if(!v)return;hist.push(v);hi=hist.length;say('$ '+v);
     if(a[0]==='open'){ids[a[1]]&&openWin(ids[a[1]])?say('opened '+a[1]):say('open: try one of '+Object.keys(ids).join(', '));return}
-    (cmds[a[0]]||function(){say(a[0]+': command not found. Try help.')})();
+    (cmds[a[0]]||function(){say(a[0]+': command not found. Try help.')})(a.slice(1),v);
   });
 
   // ---- compounding toy ----
   var iM=document.getElementById('iM'),iY=document.getElementById('iY'),iR=document.getElementById('iR'),
-      inr=new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0});
+      inr=new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}),
+      gc=document.getElementById('growth'),gx=gc.getContext('2d');
+  function drawGrowth(){
+    var d=devicePixelRatio||1,w=gc.clientWidth,h=gc.clientHeight;
+    if(!w||!h)return;
+    if(gc.width!==Math.round(w*d)||gc.height!==Math.round(h*d)){gc.width=Math.round(w*d);gc.height=Math.round(h*d)}
+    gx.setTransform(d,0,0,d,0,0);gx.fillStyle=cs('--paper');gx.fillRect(0,0,w,h);
+    var P=+iM.value,Y=+iY.value,r=+iR.value/1200;
+    function fv(y){return P*((Math.pow(1+r,12*y)-1)/r)*(1+r)}
+    var top=fv(Y),bw=w/Y,gap=bw>6?2:0,H=h-8;
+    for(var y=1;y<=Y;y++){
+      var x=(y-1)*bw,th=fv(y)/top*H,ih=P*12*y/top*H;
+      gx.fillStyle=cs('--accent');gx.fillRect(x,h-th,bw-gap,th);
+      gx.fillStyle=cs('--ink');gx.fillRect(x,h-ih,bw-gap,ih);
+    }
+  }
+  window.ResizeObserver&&new ResizeObserver(drawGrowth).observe(gc);
   function calc(){
     var P=+iM.value,Y=+iY.value,R=+iR.value,r=R/1200,n=Y*12,
         fv=P*((Math.pow(1+r,n)-1)/r)*(1+r),inv=P*n;
     document.getElementById('oM').textContent=inr.format(P);
     document.getElementById('oY').textContent=Y;
     document.getElementById('oR').textContent=R+'%';
-    document.getElementById('res').textContent=inr.format(fv)+' from '+inr.format(inv)+' invested';
-    document.getElementById('bar').style.width=(inv/fv*100)+'%';
+    document.getElementById('res').textContent=inr.format(fv)+' from '+inr.format(inv)+' invested ('+(fv/inv).toFixed(1)+'x)';
+    drawGrowth();
   }
   [iM,iY,iR].forEach(function(i){i.addEventListener('input',calc)});calc();
 
@@ -451,7 +595,9 @@ studying: DSA, systems, markets
       if(d>1e-6){
         var m=(n*sxy-sx*sy)/d,b=(sy-m*sx)/n;
         cx.strokeStyle=cs('--ink');cx.lineWidth=3;cx.beginPath();cx.moveTo(0,b);cx.lineTo(w,m*w+b);cx.stroke();
-        fit.textContent=n+' points. Trend: '+(Math.abs(m)<.05?'flat':m<0?'rising':'falling')+'.';
+        var my=sy/n,tot=0,res=0;
+        pts.forEach(function(p){tot+=Math.pow(p[1]-my,2);res+=Math.pow(p[1]-(m*p[0]+b),2)});
+        fit.textContent=n+' points, trend '+(Math.abs(m)<.05?'flat':m<0?'rising':'falling')+', fit R\u00b2 '+(tot>0?Math.max(0,1-res/tot).toFixed(2):'1.00')+' (1 is perfect).';
       }
     } else fit.textContent='Click the box to add data. A line learns it live.';
     pts.forEach(function(p){cx.fillStyle=cs('--accent');cx.strokeStyle=cs('--ink');cx.lineWidth=2;cx.fillRect(p[0]-5,p[1]-5,10,10);cx.strokeRect(p[0]-5,p[1]-5,10,10)});
@@ -460,6 +606,8 @@ studying: DSA, systems, markets
   function seed(){pts=[];for(var i=1;i<=6;i++)pts.push([i*cv.clientWidth/7,cv.clientHeight*.8-i*cv.clientHeight/10+(Math.random()-.5)*34])}
   cv.addEventListener('pointerdown',function(e){var r=cv.getBoundingClientRect();pts.push([e.clientX-r.left,e.clientY-r.top]);draw()});
   document.getElementById('clr').addEventListener('click',function(){pts=[];draw()});
+  document.getElementById('fresh').addEventListener('click',function(){seed();draw()});
+  document.getElementById('add').addEventListener('click',function(){pts.push([20+Math.random()*(cv.clientWidth-40),20+Math.random()*(cv.clientHeight-40)]);draw()});
   window.ResizeObserver?new ResizeObserver(size).observe(cv):addEventListener('resize',size);
   document.getElementById('theme').addEventListener('click',function(){setTimeout(draw,0)});
   size();seed();draw();
@@ -558,6 +706,152 @@ studying: DSA, systems, markets
   // reset dragged windows when dragging becomes unavailable (rotate, resize, dock)
   function resetPos(){if(wide.matches)return;wins.forEach(function(w){w.style.transform='';w.dataset.x=w.dataset.y=0})}
   wide.addEventListener?wide.addEventListener('change',resetPos):wide.addListener(resetPos);
+
+  // ---- v2: terminal extras ----
+  var themeNames=['teal','plum','graphite','classic'],t0=Date.now(),
+      tabs=['help','about','ml','finance','projects','contact','open','whoami','ls','date','uptime','fortune','neofetch','stack','email','history','echo','crt','reboot','theme','clear','cat','coffee','dialup','party'];
+  cmds.theme=function(a){
+    if(a[0]){
+      if(themeNames.indexOf(a[0])<0){say('theme: try '+themeNames.join(', '));return}
+      setTheme(a[0]);say('theme: '+a[0]);return;
+    }
+    document.getElementById('theme').click();say('theme: '+root.dataset.theme);
+  };
+  cmds.uptime=function(){
+    var s=Math.floor((Date.now()-t0)/1000),m=Math.floor(s/60);
+    say('up '+(m?m+' min, ':'')+(s%60)+' s, 1 user, load average: 0.01');
+  };
+  cmds.neofetch=function(){
+    say(['nikhil@nikhil.os','----------------','OS      Nikhil.OS','Study   B.Tech CSE, second year','School  Sreyas Institute of Eng. and Tech.','Shell   bash, mostly','Stack   Linux, Python, Git, C, Java, SQL','Theme   '+root.dataset.theme,'Uptime  '+Math.floor((Date.now()-t0)/1000)+' s'].join('\n'));
+  };
+  cmds.stack=function(){say('Linux  Python  Git  C  Java  Bash  SQL  HTML/CSS\n+ Raspberry Pi, self-hosting, open source')};
+  cmds.email=function(){copyMail()};
+  cmds.history=function(){say(hist.map(function(h,i){return (i+1)+'  '+h}).join('\n'))};
+  cmds.echo=function(a){say(a.join(' '))};
+  cmds.crt=function(){toggleCrt()};
+  cmds.reboot=function(){say('rebooting...');setTimeout(function(){boot(true)},300)};
+
+  // ---- v2: scanlines on/off ----
+  function toggleCrt(){
+    var off=root.classList.toggle('no-crt');
+    try{localStorage.setItem('crt',off?'off':'on')}catch(e){}
+    say('scanlines: '+(off?'off':'on'));
+  }
+
+  // ---- v2: copy email ----
+  function mailAddr(){return document.querySelector('a[href^="mailto:"]').getAttribute('href').replace('mailto:','').split('?')[0]}
+  function copyMail(){
+    var btn=document.getElementById('copyMail'),addr=mailAddr();
+    function ok(){meow('email copied');if(btn){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy email'},1600)}say('copied '+addr)}
+    function fail(){meow('copy failed, select it by hand');say('copy failed: '+addr)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(addr).then(ok,fail);return}
+    try{var t=document.createElement('textarea');t.value=addr;t.setAttribute('readonly','');t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();var r=document.execCommand('copy');t.remove();r?ok():fail()}catch(e){fail()}
+  }
+  document.getElementById('copyMail').addEventListener('click',copyMail);
+
+  // ---- v2: launcher (Ctrl/Cmd+K or /) ----
+  var pal=document.getElementById('pal'),palIn=document.getElementById('palIn'),palList=document.getElementById('palList'),
+      go=document.getElementById('go'),shown=[],sel=0,
+      wlabel={welcome:'Welcome.txt',about:'About me',now:'Terminal',ml:'Machine learning',finance:'Finance',projects:'Projects',tools:'Toolbox',contact:'Contact'};
+  function items(){
+    var a=wins.map(function(w){return {t:'Open '+(wlabel[w.id]||w.id),run:function(){openWin(w.id)}}});
+    return a.concat([
+      {t:'Show all windows',run:function(){document.getElementById('showAll').click()}},
+      {t:'Change theme',run:function(){document.getElementById('theme').click()}},
+      {t:'Toggle scanlines',run:function(){toggleCrt()}},
+      {t:'Copy email address',run:copyMail},
+      {t:'Open GitHub',run:function(){window.open('https://github.com/AyanokojiK1yotaka','_blank','noopener')}},
+      {t:'Open LinkedIn',run:function(){window.open('https://www.linkedin.com/in/nikhil-gowda-69os','_blank','noopener')}},
+      {t:'Replay boot sequence',run:function(){boot(true)}}
+    ]);
+  }
+  function renderPal(){
+    var q=palIn.value.toLowerCase().split(/\s+/).filter(Boolean);
+    shown=items().filter(function(it){var t=it.t.toLowerCase();return q.every(function(w){return t.indexOf(w)>-1})});
+    sel=Math.min(sel,Math.max(0,shown.length-1));
+    palList.textContent='';
+    if(!shown.length){var n=document.createElement('li');n.className='none';n.textContent='Nothing matches. Try "open", "theme" or "copy".';palList.appendChild(n);palIn.removeAttribute('aria-activedescendant');return}
+    shown.forEach(function(it,i){
+      var li=document.createElement('li');li.id='pal-'+i;li.setAttribute('role','option');li.setAttribute('aria-selected',i===sel);li.textContent=it.t;
+      li.addEventListener('click',function(){runPal(i)});palList.appendChild(li);
+    });
+    palIn.setAttribute('aria-activedescendant','pal-'+sel);
+  }
+  function movePal(d){
+    if(!shown.length)return;
+    sel=(sel+d+shown.length)%shown.length;
+    [].forEach.call(palList.children,function(li,i){li.setAttribute('aria-selected',i===sel)});
+    palIn.setAttribute('aria-activedescendant','pal-'+sel);
+    palList.children[sel].scrollIntoView({block:'nearest'});
+  }
+  function runPal(i){var it=shown[i];if(!it)return;pal.close();it.run()}
+  function openPal(){if(!pal.showModal||pal.open)return;palIn.value='';sel=0;renderPal();pal.showModal();palIn.focus()}
+  if(pal.showModal){
+    go.addEventListener('click',openPal);
+    document.getElementById('palX').addEventListener('click',function(){pal.close()});
+    pal.addEventListener('click',function(e){if(e.target===pal)pal.close()});
+    palIn.addEventListener('input',function(){sel=0;renderPal()});
+    palIn.addEventListener('keydown',function(e){
+      if(e.key==='ArrowDown'){e.preventDefault();movePal(1)}
+      else if(e.key==='ArrowUp'){e.preventDefault();movePal(-1)}
+      else if(e.key==='Enter'){e.preventDefault();runPal(sel)}
+    });
+    document.addEventListener('keydown',function(e){
+      if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openPal();return}
+      if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)){e.preventDefault();openPal()}
+    });
+    document.getElementById('kbd').textContent=/Mac|iPhone|iPad/.test(navigator.platform||'')?'\u2318K':'Ctrl K';
+  } else go.hidden=true;
+
+  // ---- v2: live repositories in My Files ----
+  (function(){
+    var box=document.getElementById('files'),more=document.getElementById('moreDir'),KEY='repos-v1';
+    function render(list){
+      if(!list||!list.length)return;
+      [].slice.call(box.querySelectorAll('.soon')).forEach(function(n){n.remove()});
+      document.getElementById('uc').hidden=true;
+      document.getElementById('projNote').textContent='Latest public repositories, pulled live from GitHub.';
+      list.forEach(function(r){
+        var a=document.createElement('a'),ic=document.createElement('span'),sm=document.createElement('small');
+        a.className='file';a.href=r.html_url;a.rel='noopener';a.title=r.description||r.name;
+        ic.className='ic';sm.textContent=(r.language||'repo')+(r.stargazers_count?' \u2605'+r.stargazers_count:'');
+        a.appendChild(ic);a.appendChild(document.createTextNode(r.name));a.appendChild(sm);
+        box.insertBefore(a,more);
+      });
+    }
+    function clean(data){
+      return (Array.isArray(data)?data:[]).filter(function(r){return r&&!r.fork&&!r.archived&&r.name!=='AyanokojiK1yotaka'&&/^https:\/\/github\.com\//.test(r.html_url)}).slice(0,6)
+        .map(function(r){return {name:String(r.name),html_url:r.html_url,description:r.description,language:r.language,stargazers_count:r.stargazers_count}});
+    }
+    try{var c=JSON.parse(sessionStorage.getItem(KEY));if(c&&c.length){render(c);return}}catch(e){}
+    if(!window.fetch)return;
+    fetch('https://api.github.com/users/AyanokojiK1yotaka/repos?sort=pushed&per_page=20').then(function(r){return r.ok?r.json():[]}).then(function(d){
+      var list=clean(d);render(list);try{if(list.length)sessionStorage.setItem(KEY,JSON.stringify(list))}catch(e){}
+    }).catch(function(){});
+  })();
+
+  // ---- v2: boot screen ----
+  var bootLines=['Nikhil.OS BIOS v2.6','Memory test .......... 640K OK','Loading cat.sys ...... OK','Mounting /home/nikhil ... OK','Starting windows ...','Welcome.'],bootTimer;
+  function boot(force){
+    var el=document.getElementById('boot'),tx=document.getElementById('bootText'),i=0;
+    if(!el)return;
+    if(!force&&!root.classList.contains('booting'))return;
+    try{sessionStorage.setItem('boot','1')}catch(e){}
+    clearTimeout(bootTimer);tx.textContent='';
+    root.classList.add('booting','bootrun');
+    function done(){
+      clearTimeout(bootTimer);tx.textContent='';
+      root.classList.remove('booting','bootrun');
+      document.removeEventListener('keydown',done);document.removeEventListener('pointerdown',done);
+    }
+    function step(){
+      if(i<bootLines.length){tx.textContent+=(i?'\n':'')+bootLines[i++];bootTimer=setTimeout(step,i===bootLines.length?400:190)}
+      else done();
+    }
+    setTimeout(function(){document.addEventListener('keydown',done);document.addEventListener('pointerdown',done)},0);
+    step();
+  }
+  boot(false);
 
   try{console.log('%cHi dev! Found the console. Try: up up down down left right left right b a','font:16px monospace')}catch(e){}
 })();
